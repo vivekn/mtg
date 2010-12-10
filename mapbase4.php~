@@ -68,6 +68,7 @@ $(document).ready(function(){
   /* Add code for friend requests after going through jQuery AJAX API */
   
    <?php
+   $uid = 800; // For Testing purposes
   foreach ($friend_req_array as $sth) {
   //$('#fsug_d').dialog({autoOpen:false,modal:true}).load("friendsuggestion.html");
   // edit the index controller,add reject feature
