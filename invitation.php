@@ -40,7 +40,7 @@ FBML;
 $more_content= <<<more_FBML
 <fb:serverfbml style="width: 650px;">
 <fb:request-form action="http://apps.facebook.com/mapthegraph/" method="POST" invite="true" type="Map the Graph" content="{htmlentities($content)}">  
-<fb:multi-friend-selector max="6" actiontext="Here are some of your friends who haven't added Map the Graph to their profile. " showborder="true" rows="5" exclude_ids="{$friends}"></fb:request-form></fb:serverfbml>
+<fb:multi-friend-selector max="6" actiontext="Here are some of your friends who haven't added Map the Graph to their profile. " showborder="true" rows="5" exclude_ids="{$friends}"/></fb:request-form></fb:serverfbml>
 more_FBML;
 echo $more_content;
 ?>
