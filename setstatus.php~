@@ -1,5 +1,4 @@
-<?php
-include "boilerplate.php";
+<?  cinclude "boilerplate.php";
 $me = $_REQUEST['uid'];
 $msg = $_REQUEST['msg'];
 $lat = $_REQUEST['lat'];
