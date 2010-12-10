@@ -61,14 +61,17 @@ $.ajaxSetup({
 			});
 
 $(document).ready(function(){
- 
+ <?php
+ $uid = 800; // For Testing purposes
+ $friend_req_array = array();
+ ?>
   $('#frnd_upd').load('ffeed.php',"uid=<?=$uid?>&start=0");
   $('apDiv1').load('miniprof.php',"uid=<?=$uid?>");
 
   /* Add code for friend requests after going through jQuery AJAX API */
   
    <?php
-   $uid = 800; // For Testing purposes
+   
   foreach ($friend_req_array as $sth) {
   //$('#fsug_d').dialog({autoOpen:false,modal:true}).load("friendsuggestion.html");
   // edit the index controller,add reject feature

@@ -150,7 +150,7 @@ function deleteOverlays() {
 																					   lat:event.latLng.lat(),
 																					   lng:event.latLng.lng()
 																						}, function (data) {
-																							alert("status updated"); });
+																							alert("status updated::"+data); });
 															 }
 														 span.setAttribute('class','boldbuttons');
 														 span.setAttribute('href','#');
