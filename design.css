@@ -1,0 +1,56 @@
+.design{
+font:medium "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+background-color:#DDD;
+color:#000;
+
+}
+
+.design2 {
+font:medium "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+
+color:#000;
+
+}
+
+.design3 {
+font:medium "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+background-color:deepskyblue;
+color:#000;
+
+}
+
+/* Button CSS */
+
+a.boldbuttons{
+background: transparent url('media/roundedge-green-left.gif') no-repeat top left;
+display: block;
+float: left;
+font: bold 13px Arial; /* Change 13px as desired */
+line-height: 22px; /* This value + 4px + 4px (top and bottom padding of SPAN) must equal height of button background (default is 30px) */
+height: 30px; /* Height of button background height */
+padding-left: 8px; /* Width of left menu image */
+text-decoration: none;
+
+}
+
+a:link.boldbuttons, a:visited.boldbuttons, a:hover.boldbuttons, a:active.boldbuttons{
+color: #BBB; /*button text color*/
+}
+
+a.boldbuttons span{
+	color:#EEE;
+	background: transparent url('media/roundedge-green-right.gif') no-repeat top right;
+	display: block;
+	padding: 4px 10px 4px 2px; /*Set 10px to be equal or greater than'padding-left' value above*/
+	font-size: medium;
+}
+
+a:hover.boldbuttons{ /* Hover state CSS */
+text-decoration: underline;
+}
+
+
+.buttonwrapper{ /* Container you can use to surround a CSS button to clear float */
+overflow: hidden; /*See: http://www.quirksmode.org/css/clearing.html */
+width: 100%;
+}
