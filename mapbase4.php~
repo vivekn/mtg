@@ -67,11 +67,11 @@ $(document).ready(function(){
 
   /* Add code for friend requests after going through jQuery AJAX API */
   
-   <?php
+  <?php
   foreach ($friend_req_array as $sth) {
   //$('#fsug_d').dialog({autoOpen:false,modal:true}).load("friendsuggestion.html");
   // edit the index controller,add reject feature
-  echo "jQuery('#freq_d$sth').dialog({autoOpen:false,modal:true}).load('frequest.php','uid=$sth&me=$uid?>');";
+  echo 'jQuery("#freq_d'.$sth.'").dialog({autoOpen:false,modal:true}).load("frequest.php","uid='.$sth'&me=$uid?>");';
   echo "jQuery('#accept$sth').click(function() {jQuery.post('acceptreq.php',{ requestor:$sth,uid:$uid});jQuery('#freq_d$sth').dialog('close');});";
   echo "jQuery('#reject$sth').click(function() {jQuery('#freq_d$sth').dialog('close');})";
   echo "jQuery('#freq_d$sth').dialog('open')";
@@ -174,7 +174,7 @@ function deleteOverlays() {
 		}
 		
 		info.setContent(html);
-			info.open(map,markersArray[0]);
+		info.open(map,markersArray[0]);
 		}
 
 </script>
