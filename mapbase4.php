@@ -78,6 +78,7 @@ $(document).ready(function(){
  ?>
   $('#frnd_upd').load('ffeed.php',"uid=<?=$uid?>&start=0");
   $('apDiv1').load('miniprof.php',"uid=<?=$uid?>");
+  $("#ShowHelp").toggle('fast');
 
   /* Add code for friend requests after going through jQuery AJAX API */
   
@@ -193,6 +194,16 @@ function deleteOverlays() {
 			info.open(map,markersArray[0]);
 		}
 
+	function statusClickHandler() {
+		$("#change_status").click(function () {
+			$("#ShowHelp").toggle('slow');
+			if(statusChangeEnabled) 
+				$("#change_status").html("Hide help");
+			else 
+				$("#change_status").html("Change status");
+			}
+		
+		}
 </script>
 </head>
 <body onLoad="initialize()">
@@ -202,7 +213,8 @@ function deleteOverlays() {
     </div>
     <div id="apDiv2" class="design">
     <!-- Add jQuery code to toggle status -->
- <a class ='boldbuttons' href='#' onClick=""><span>Change Status</span></a>
+ <a class ='boldbuttons' id="change_status" href='#' onClick="statusClickHandler"><span>Change Status</span></a>
+ <p id="ShowHelp">Click on the map to set your status</p>
     </div>
   
 <div id = "frnd_upd" class="design2"></div>
