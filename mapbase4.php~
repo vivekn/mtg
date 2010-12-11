@@ -201,8 +201,7 @@ function deleteOverlays() {
  
     </div>
     <div id="apDiv2" class="design">
-    <!-- Add jQuery code to toggle status -->
- <a class ='boldbuttons' href='#' onClick=""><span>Change Status</span></a>
+ 
     </div>
   
 <div id = "frnd_upd" class="design2"></div>
