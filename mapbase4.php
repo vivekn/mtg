@@ -88,7 +88,7 @@ $(document).ready(function(){
   //$('#fsug_d').dialog({autoOpen:false,modal:true}).load("friendsuggestion.html");
   // edit the index controller,add reject feature
   echo "jQuery('#freq_d$sth').dialog({autoOpen:false,modal:true}).load('frequest.php','uid=$sth&me=$uid?>');";
-  echo "jQuery('#accept$sth').click(function() {jQuery.post('acceptreq.php',{ requestor:$sth,uid:$uid});jQuery('#freq_d$sth').dialog('close');});";
+  echo "jQuery('#accept$sth').click(function() {jQuery.post('acceptreq.php',{ sent_from:$sth,uid:$uid});jQuery('#freq_d$sth').dialog('close');});";
   echo "jQuery('#reject$sth').click(function() {jQuery('#freq_d$sth').dialog('close');})";
   echo "jQuery('#freq_d$sth').dialog('open')";
   }

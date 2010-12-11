@@ -22,11 +22,11 @@
 		else {
 			/* Code for friend requests */
 			$i = 0;
-			$query = "SELECT * FROM friend_requests WHERE requestee = \"$uid\"";
+			$query = "SELECT * FROM requests WHERE sent_to = \"$uid\"";
 			$r = db_query($query);
 			
 			while($friend = mysql_fetch_array($r))
-				$friend_req_array[$i++] = $friend['requestor'];
+				$friend_req_array[$i++] = $friend['sent_from'];
 				
 			}
 			include_once "mapbase4.php";
