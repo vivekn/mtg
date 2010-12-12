@@ -17,44 +17,6 @@
 <LINK REL=StyleSheet HREF="design.css" TYPE="text/css" MEDIA="screen">
 
 
-<style type="text/css">
-  html { height: 100% }
-  body {
-	height: 400px;
-	margin: 0px;
-	padding: 0px;
-	width: 600px;
-}
-  #map_canvas { height: 100%; width: 60% }
-#apDiv1 {
-	position:absolute;
-	left:364px;
-	top:10px;
-	width:301px;
-	height:393px;
-	z-index:1;
-	
-}
-#apDiv2 {
-	position:absolute;
-	left:364px;
-	top:170px;
-	width:301px;
-	height:393px;
-	z-index:1;
-	
-}
-#frnd_upd {
-	position:absolute;
-	left:364px;
-	top:200px;
-	width:301px;
-	
-	z-index:1;
-	
-}
-</style>
-
 <script type="text/javascript"
     src="http://maps.google.com/maps/api/js?sensor=false">
 </script>
@@ -77,7 +39,7 @@ $(document).ready(function(){
  $friend_req_array = array();*/
  ?>
   $('#frnd_upd').load('ffeed.php',"uid=<?=$uid?>&start=0");
-  $('apDiv1').load('miniprof.php',"uid=<?=$uid?>");
+  $('#apDiv1').load('miniprof.php',"uid=<?=$uid?>");
   $("#ShowHelp").toggle('fast');
 
   /* Add code for friend requests after going through jQuery AJAX API */
@@ -158,11 +120,11 @@ function deleteOverlays() {
 				 addMarker2(event.latLng);
 				 $.post('./setstatus.php',{ //check jQuery docs for this
 										   uid:<?=$uid?>,
-										   msg:$("status_upd").val(),
+										   msg:$("#st_text").val(),
 										   lat:event.latLng.lat(),
 										   lng:event.latLng.lng()
 											}, function (data) {
-												alert("status updated::"+data); });
+												alert("Yay! your status has been updated"); });
 				 }
 			 span.setAttribute('class','boldbuttons');
 			 span.setAttribute('href','#');
@@ -195,13 +157,15 @@ function deleteOverlays() {
 		}
 
 	function statusClickHandler() {
+		
+		statusChangeEnabled = !statusChangeEnabled;
 		$("#change_status").click(function () {
 			$("#ShowHelp").toggle('slow');
 			if(statusChangeEnabled) 
-				$("#change_status").html("Hide help");
+				$("#change_status").html("<span>Hide help</span>");
 			else 
-				$("#change_status").html("Change status");
-			}
+				$("#change_status").html("<span>Change status</span>");
+			});
 		
 		}
 </script>
@@ -210,19 +174,19 @@ function deleteOverlays() {
 <a id="msgdown" ></a>
   <div id="apDiv1" class="design">
  
-    </div>
-    <div id="apDiv2" class="design">
-    <!-- Add jQuery code to toggle status -->
- <a class ='boldbuttons' id="change_status" href='#' onClick="statusClickHandler"><span>Change Status</span></a>
- <p id="ShowHelp">Click on the map to set your status</p>
-    </div>
+  </div>
+   <div id="apDiv2" class="design2">
+		 <a class ='boldbuttons' id="change_status" href='#' onClick="statusClickHandler()"><span>Change Status</span></a>
+		 <br/>
+		 <p id="ShowHelp">Click on the map to set your status</p>
+	</div>
   
-<div id = "frnd_upd" class="design2"></div>
+<div id = "frnd_upd" class="design"></div>
+<div id ="freq_d" title="Accept Request"></div>
+<div id ="fsug_d" title="Friend Suggestions"></div>
 
-  <div id="map_canvas"/>
-  <div id ="freq_d" title="Accept Request"></div>
-     <div id ="fsug_d" title="Friend Suggestions"></div>
-
+<div id="map_canvas"></div>
+  
     
 </body>
 </html>

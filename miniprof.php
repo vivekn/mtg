@@ -10,16 +10,13 @@
 		$r = db_query($query1);
 		$t =  mysql_fetch_array($r);
 	?>
- 	<img src="http://graph.facebook.com/<?=$me?>/picture/?type=large" alt=" " width="128" height="128" align="right"/>
-    <p> <?=$t['name']?></p>
-	<HR>
+ 	<img src="http://graph.facebook.com/<?=$me?>/picture/" alt=" " width="50" height="50" align="right"/>
+    <h4><?=$t['name']?></h4>
+    	<HR>
 	<p>
    <?=$t['status']?>
     </p>
     </div>
-    <div class ="design2">
-<!-- Button Here - toggle styles with jQuery-->
-</div>
 <HR>
    
 </html>

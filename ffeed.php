@@ -8,6 +8,8 @@ include "fbmain.php";
 $me = $_REQUEST['uid'];
 $start = $_REQUEST['start'];
 
+echo "<p>Updates from friends</p><br/>";
+
 if($start<=0)
 	$start=0;
 
@@ -25,7 +27,7 @@ for($i=$start;$i<($start+5);$i++) {
 	}
 if($start!=0)
 	echo '<a id="prev">prev</a>';
-if(count($result)>($start+5))
+if(mysql_num_rows($r)>($start+5))
 	echo '<a id="next">next</a>';
 
 ?>

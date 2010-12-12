@@ -24,7 +24,7 @@
 			$i = 0;
 			$query = "SELECT * FROM requests WHERE sent_to = \"$uid\"";
 			$r = db_query($query);
-			
+			$friend_req_array = array();
 			while($friend = mysql_fetch_array($r))
 				$friend_req_array[$i++] = $friend['sent_from'];
 				

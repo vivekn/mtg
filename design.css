@@ -1,3 +1,35 @@
+  html { height: 100% }
+  body {
+	height: 400px;
+	margin: 0px;
+	padding: 0px;
+	width: 600px;
+}
+  #map_canvas { height: 100%; width: 60% }
+#apDiv1 {
+	position:absolute;
+	left:364px;
+	width:301px;
+	z-index:1;
+	
+}
+#apDiv2 {
+	position:absolute;
+	left:364px;
+	width:301px;
+	top: 140px;
+	z-index:1;
+	
+}
+#frnd_upd {
+	position:absolute;
+	left:364px;
+	width:301px;
+	height: 200px;
+	top: 200px;	
+	z-index:1;
+	
+}
 .design{
 font:medium "Lucida Sans Unicode", "Lucida Grande", sans-serif;
 background-color:#DDD;
@@ -7,15 +39,21 @@ color:#000;
 
 .design2 {
 font:medium "Lucida Sans Unicode", "Lucida Grande", sans-serif;
-
+background-color: white;
 color:#000;
 
 }
+
+p {
+	font:"Lucida Sans Unicode", "Lucida Grande", sans-serif;
+	font-size: 10pt;
+	}
 
 .design3 {
 font:medium "Lucida Sans Unicode", "Lucida Grande", sans-serif;
 background-color:deepskyblue;
 color:#000;
+
 
 }
 
