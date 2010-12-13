@@ -31,14 +31,16 @@
 	
 }
 .design{
-font:medium "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+font:"Lucida Sans Unicode", "Lucida Grande", sans-serif;
+font-size: 9pt;
 background-color:#DDD;
 color:#000;
 
 }
 
 .design2 {
-font:medium "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+font:"Lucida Sans Unicode", "Lucida Grande", sans-serif;
+font-size: 9pt;
 background-color: white;
 color:#000;
 
