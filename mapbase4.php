@@ -5,7 +5,7 @@
 <link rel="stylesheet" type="text/css" href="css/style.css" media="screen"/>
 <link rel="stylesheet" type="text/css" href="css/ui-lightness/jquery-ui-1.8.6.custom.css" media="screen"/>
 
-<title>mapthegraph!</title>
+<title>mapTheGraph!</title>
 <script type="text/javascript" src="js/jquery-1.4.2.min.js"></script>
 <script type="text/javascript" src="ui/jquery.ui.core.js"></script>
 <script type="text/javascript" src="ui/jquery.ui.widget.js"></script>
@@ -16,9 +16,6 @@
 	<script src="ui/jquery.ui.resizable.js"></script>
 <LINK REL=StyleSheet HREF="design.css" TYPE="text/css" MEDIA="screen">
 
-
-<script type="text/javascript"
-    src="http://maps.google.com/maps/api/js?sensor=false">
 </script>
 <script type="text/javascript"
     src="js/jquery-ui-1.8.6.custom.min.js">
@@ -26,6 +23,27 @@
 
 <!-- jQuery Code starts here-->
 <script type="text/javascript">
+
+function statusClickHandler() {
+		
+		statusChangeEnabled = !statusChangeEnabled;
+		$("#ShowHelp").hide('slow');
+		
+		if(statusChangeEnabled) {
+
+			$("#change_status").html("<span>I'm done changing status</span>");
+			$("#ShowHelp").hide('slow');
+			$("#ShowHelp").html("Click on your current position on the map to update your status")		
+			$("#ShowHelp").show('slow');		
+		}		
+		else {
+			$("#change_status").html("<span>Update my status</span>");
+			$("#ShowHelp").hide('slow');
+			$("#ShowHelp").html("Find your position on the map by zooming or panning , if its not already there,then click the button above to update your status")		
+			$("#ShowHelp").show('slow');			
+		}
+		
+		}
 
 var statusChangeEnabled = false; // Global variable controlling status change option
 
@@ -40,7 +58,7 @@ $(document).ready(function(){
  ?>
   $('#frnd_upd').load('ffeed.php',"uid=<?=$uid?>&start=0");
   $('#apDiv1').load('miniprof.php',"uid=<?=$uid?>");
-  $("#ShowHelp").toggle('fast');
+  $("#ShowHelp").show();
 
   /* Add code for friend requests after going through jQuery AJAX API */
   
@@ -58,8 +76,19 @@ $(document).ready(function(){
 
 });
 </script>
-<!-- jQuery Code ends here-->
+<!-- jQuery Code ends here,Map code begins-->
+
+<script type="text/javascript"
+    src="http://www.google.com/jsapi"></script>
+ 
  <script type="text/javascript">
+
+  // Loading the Google Maps API
+  google.load('maps', 3, {
+    'other_params': 'sensor=false&language=en'
+  });
+ 
+ 
   var map,info,smode=false,markersArray=[],k=0;
   $("boldbuttons").click(function() {
 								  notif();
@@ -97,14 +126,24 @@ function deleteOverlays() {
 }
   
   function initialize() {
-    var latlng = new google.maps.LatLng(18.986, 72.832);
+    // Getting the position of the user thru auto-geolocation
+	if (google.loader.ClientLocation) {
+  		var latLng = new google.maps.LatLng(google.loader.ClientLocation.latitude,                 google.loader.ClientLocation.longitude);
+		var zoom = 10;  		
+  		}
+   else        {
+       var latLng = new google.maps.LatLng(0, 0);
+  		var zoom = 1;
+}
+
     var myOptions = {
-      zoom: 8,
-      center: latlng,
+      zoom: zoom,
+      center: latLng,
       mapTypeId: google.maps.MapTypeId.ROADMAP
     };
      map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
-	 
+
+
 	 google.maps.event.addListener(map,'click',function (event) {
 		if (statusChangeEnabled) {													 
 			deleteOverlays();
@@ -153,21 +192,10 @@ function deleteOverlays() {
 		}
 		
 		info.setContent(html);
-			info.open(map,markersArray[0]);
+		info.open(map,markersArray[0]);
 		}
 
-	function statusClickHandler() {
-		
-		statusChangeEnabled = !statusChangeEnabled;
-		$("#change_status").click(function () {
-			$("#ShowHelp").toggle('slow');
-			if(statusChangeEnabled) 
-				$("#change_status").html("<span>Hide help</span>");
-			else 
-				$("#change_status").html("<span>Change status</span>");
-			});
-		
-		}
+	
 </script>
 </head>
 <body onLoad="initialize()">
@@ -176,9 +204,9 @@ function deleteOverlays() {
  
   </div>
    <div id="apDiv2" class="design2">
-		 <a class ='boldbuttons' id="change_status" href='#' onClick="statusClickHandler()"><span>Change Status</span></a>
-		 <br/>
-		 <p id="ShowHelp">Click on the map to set your status</p>
+		 <a class ='boldbuttons' id="change_status" href='#' onClick="statusClickHandler()"><span>Update your status</span></a>
+<br>
+<p id="ShowHelp">Find your position on the map by zooming or panning , if its not already there,then click the button above to update your status</p>
 	</div>
   
 <div id = "frnd_upd" class="design"></div>
