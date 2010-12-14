@@ -229,7 +229,7 @@ function getAddress(latLng) {
    <div id="apDiv2" class="design2">
 		 <a class ='boldbuttons' id="change_status" href='#' onClick="statusClickHandler()"><span>Update your status</span></a>
 <br>
-<p id="ShowHelp">Find your position on the map by zooming or panning , if its not already there,then click the button above to update your status</p>
+<a id="ShowHelp">Find your position on the map by zooming or panning , if its not already there,then click the button above to update your status</a>
 	</div>
   
 <div id = "frnd_upd" class="design"></div>

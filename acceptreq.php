@@ -11,8 +11,8 @@ function accept_friend($me,$sent_from,$invite_mode) {
 	
 	$exec = db_query($query1);	
 	
-	$query2 = "INSERT INTO users1 (uid,name) VALUES (\"$sent_from\",\"$me\")";
-	$query3 = "INSERT INTO users1 (uid,name) VALUES (\"$me\",\"$sent_from\")";
+	$query2 = "INSERT INTO connections (uid1,uid2) VALUES (\"$sent_from\",\"$me\")";
+	$query3 = "INSERT INTO connections (uid2,uid1) VALUES (\"$me\",\"$sent_from\")";
 	$exec = db_query($query2);
 	$exec = db_query($query3);
 }
