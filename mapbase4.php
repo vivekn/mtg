@@ -89,7 +89,7 @@ $(document).ready(function(){
   });
  
  
-  var map,info,smode=false,markersArray=[],k=0;
+  var map,geocoder,info,smode=false,markersArray=[],k=0;
   $("boldbuttons").click(function() {
 								  notif();
 								  event.preventDefault();
@@ -194,6 +194,29 @@ function deleteOverlays() {
 		info.setContent(html);
 		info.open(map,markersArray[0]);
 		}
+
+//Reverse Geocoding function
+function getAddress(latLng) {
+  // Check to see if a geocoder object already exists
+  if (!geocoder) {
+    geocoder = new google.maps.Geocoder();
+  }
+  // Creating a GeocoderRequest object
+  var geocoderRequest = {
+    latLng: latLng
+  }
+  
+  geocoder.geocode(geocoderRequest, function(results, status) {
+  	// Check to see if the request went allright
+	if (status == google.maps.GeocoderStatus.OK) {
+		 if (results[0].formatted_address) 
+		 		return results[0].formatted_address;
+		 	}
+	else 
+		return "";
+		});
+  		
+  }
 
 	
 </script>

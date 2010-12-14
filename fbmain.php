@@ -39,7 +39,7 @@
     $fbme = null;
 
     if (!$session) {
-		$loginurl = str_replace("http://","https://",$loginurl);
+		$loginUrl = str_replace("http://","https://",$loginUrl);
         echo "<script type='text/javascript'>top.location.href = '$loginUrl';</script>";
         exit;
     }
