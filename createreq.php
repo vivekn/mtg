@@ -1,7 +1,7 @@
 <?php
 /* For creating invites or friend requests */
 
-include "boilerplate.php";
+include_once "boilerplate.php";
 $me = $_REQUEST['uid'];
 $sent_to = $_REQUEST['sent_to'];
 

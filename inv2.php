@@ -1,3 +1,6 @@
+<?php
+	include_once "fbmain.php";
+?>
 <html>
 <head>
 <style type="text/css">
@@ -21,26 +24,26 @@ text-decoration: none;
 	function click_handler() {
 		$(this).hide('slow');		
 		var friendId = $(this).attr('name');		
-		}
-	function click_handler_invite() {
-		$(this).hide('slow');		
-		var friendId = $(this).attr('name');		
+		$.post('createreq.php',{
+										uid:<?php echo $uid;?>,
+										sent_to:friendId
+											});
 		}
 </script>
     <?php  
-	include_once "fbmain.php";
+
 	include_once "boilerplate.php";
     // Retrieve array of friends who've already added the app.  
    $fql = 'SELECT uid,name FROM user WHERE uid IN (SELECT uid2 FROM friend WHERE uid1='.$uid.') AND has_added_app = 1'; 
    $fql2 = 'SELECT uid,name FROM user WHERE uid IN (SELECT uid2 FROM friend WHERE uid1='.$uid.') AND has_added_app = 0'; 
-   $_friends = $facebook->api(array(  
+ /*  $_friends = $facebook->api(array(  
  						'method' => 'fql.query',  
  						'query' =>$fql,  
 							));  
    $other_friends = $facebook->api(array(  
  						'method' => 'fql.query',  
  						'query' =>$fql2,  
-							));  
+							));  */
    // Extract the user ID's returned in the FQL request into a new array.  
    $friends = array();
    $print_or_not = false;  
@@ -75,7 +78,7 @@ for($i = 0;$i <= 5; $i++)
 echo "<br> <p>Would you like to expand your graph by adding these people?</p><br>";
 
 foreach ($user as $new_friend)  {
-	echo "<a>$other_friends[$new_friend][name]            </a><a class = 'newfield' name='$other_friends[$new_friend][uid]' onclick ='click_handler_invite()' href ='#'>Invite</a><br>";
+	echo "<a>$other_friends[$new_friend][name]            </a><a class = 'newfield' name='$other_friends[$new_friend][uid]' onclick ='click_handler()' href ='#'>Invite</a><br>";
 	
 	}
 
