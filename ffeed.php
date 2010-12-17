@@ -1,8 +1,5 @@
 <html>
-<script type="text/javascript" src = "js/jquery-ui-1.8.6.custom.min.js" >
-</script>
-<script type="text/javascript" src = "jquery.timeago.js">
-</script>
+
 <?php
 /* The friend feed , ie , status and location updates of friends */
 
@@ -21,18 +18,21 @@ $query1 = "SELECT uid,lat,lng,status,timestamp FROM updates WHERE uid IN  (SELEC
 $r = db_query($query1);
 
 $i=0;
-//echo '<html><head><LINK REL=StyleSheet HREF="design.css" TYPE="text/css" MEDIA=screen></head><body><div id ="" class = "">';
+
 for($i=$start;$i<($start+5);$i++) {
 	$result = mysql_fetch_array($r);
+	$r2 = db_query("SELECT * FROM users1 WHERE uid = \"$me\"");
+	$res2 = mysql_fetch_array($r2);
+	
 	if(!$result)
 		break;
-	$fbuser  = $facebook->api('/'.$result['uid']);
-	echo '<img src = "http://graph.facebook.com/'.$me.'/picture/" width="32" height ="32"/>.<fb:name uid = "'.$user.'" linked ="false"/>'.$result['status'].'@ \{ $result[lat] , $result[lng] \} on'.print_time_diff($result[timestamp]);
+	$result['name'] = $res2['name'];
+	print_status($result);
 	}
 if($start!=0)
-	echo '<a id="prev">prev</a>';
+	echo '<a id="prev" onclick = "$("#frnd_upd").load("ffeed.php","uid=$uid&start={$start-5}");">prev</a>';
 if(mysql_num_rows($r)>($start+5))
-	echo '<a id="next">next</a>';
+	echo '<a id="next" onclick = "$("#frnd_upd").load("ffeed.php","uid=$uid&start={$start+5}");">next</a>';
 
 ?>
 </html>

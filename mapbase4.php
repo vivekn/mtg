@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:fb="http://www.facebook.com/2008/fbml">
 <head>
 <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
 <link rel="stylesheet" type="text/css" href="css/style.css" media="screen"/>
@@ -10,10 +10,11 @@
 <script type="text/javascript" src="ui/jquery.ui.core.js"></script>
 <script type="text/javascript" src="ui/jquery.ui.widget.js"></script>
 <script type="text/javascript" src="ui/jquery.ui.dialog.js"></script>
-	<script src="ui/jquery.ui.mouse.js"></script>
-	<script src="ui/jquery.ui.draggable.js"></script>
-	<script src="ui/jquery.ui.position.js"></script>
-	<script src="ui/jquery.ui.resizable.js"></script>
+<script src="ui/jquery.ui.mouse.js"></script>
+<script src="ui/jquery.ui.draggable.js"></script>
+<script src="ui/jquery.ui.position.js"></script>
+<script src="ui/jquery.ui.resizable.js"></script>
+<script type="text/javascript" src = "jquery.timeago.js"></script>
 <LINK REL=StyleSheet HREF="design.css" TYPE="text/css" MEDIA="screen">
 
 </script>
@@ -52,25 +53,22 @@ $.ajaxSetup({
 			});
 
 $(document).ready(function(){
- <?php
- /*$uid = 800; // For Testing purposes
- $friend_req_array = array();*/
- ?>
+ 
   $('#frnd_upd').load('ffeed.php',"uid=<?=$uid?>&start=0");
   $('#apDiv1').load('miniprof.php',"uid=<?=$uid?>");
   $("#ShowHelp").show();
-
+	var suggest_dialog = '<div id ="fsug_d" title="Friend Suggestions"><img src="ajax-loader.gif" alt="Loading ..." /></div>'
   /* Add code for friend requests after going through jQuery AJAX API */
   
    <?php
    
   foreach ($friend_req_array as $sth) {
-  //$('#fsug_d').dialog({autoOpen:false,modal:true}).load("friendsuggestion.html");
+
   // edit the index controller,add reject feature
-  echo "jQuery('#freq_d$sth').dialog({autoOpen:false,modal:true}).load('frequest.php','uid=$sth&me=$uid?>');";
-  echo "jQuery('#accept$sth').click(function() {jQuery.post('acceptreq.php',{ sent_from:$sth,uid:$uid});jQuery('#freq_d$sth').dialog('close');});";
-  echo "jQuery('#reject$sth').click(function() {jQuery('#freq_d$sth').dialog('close');})";
-  echo "jQuery('#freq_d$sth').dialog('open')";
+  echo "jQuery('<div id = \"freq$sth\" title = \"Accept Friend request\">').appendTo(\"body\");"; 
+  echo "jQuery('#freq_d$sth').dialog({autoOpen:false,modal:true}).load('frequest.php','uid=$sth&me=$uid');";
+  
+  echo "jQuery('#freq_d$sth').dialog('open');";
   }
 	?>
 
@@ -134,6 +132,17 @@ function deleteOverlays() {
    else        {
        var latLng = new google.maps.LatLng(0, 0);
   		var zoom = 1;
+  		
+  		//Find the user's previous location if unable to locate current location
+  		<?php
+  		if(isset($posn))
+  			{
+  				if($posn['lat'] && $posn['lng'])	{
+  					echo "latLng = new google.maps.LatLng($posn[lat], $posn[lng]);";
+  					echo "zoom = 9;";
+  					}
+  			}
+  		?>
 }
 
     var myOptions = {
@@ -157,13 +166,15 @@ function deleteOverlays() {
 			 span.setAttribute('id','status_upd');
 			 span.onclick =   function () {
 				 addMarker2(event.latLng);
+				 var msg = $("#st_text").val();
 				 $.post('./setstatus.php',{ //check jQuery docs for this
 										   uid:<?=$uid?>,
-										   msg:$("#st_text").val(),
+										   msg:msg,
 										   lat:event.latLng.lat(),
 										   lng:event.latLng.lng()
 											}, function (data) {
-												alert("Yay! your status has been updated"); });
+													var loc = getAddress(event.latLng);
+													feedHandler(msg,loc); });
 				 }
 			 span.setAttribute('class','boldbuttons');
 			 span.setAttribute('href','#');
@@ -185,6 +196,28 @@ function deleteOverlays() {
 										});
 	marker.setMap(map);
 }
+
+	function addMarkerInfo(latlng,html) {
+		var marker = new google.maps.Marker({
+										position:latlng,
+										});
+		if(!info) {
+		info = new google.maps.InfoWindow();
+		}
+		
+		info.setContent(html);
+		google.maps.event.addListener(marker,'mouseover',function () {
+						info.open(map,marker);
+			});
+		google.maps.event.addListener(marker,'mouseout',function () {
+						info.close();
+			});
+			
+		
+		marker.setMap(map);		
+		
+		
+		}
 
 	function addInfo(latlng,html) {
 		if(!info) {
@@ -220,14 +253,14 @@ function getAddress(latLng) {
 
 	
 </script>
+
 </head>
 <body onLoad="initialize()">
 <a id="msgdown" ></a>
-  <div id="apDiv1" class="design">
- 
-  </div>
-   <div id="apDiv2" class="design2">
-		 <a class ='boldbuttons' id="change_status" href='#' onClick="statusClickHandler()"><span>Update your status</span></a>
+<div id="apDiv1" class="design">
+</div>
+<div id="apDiv2" class="design2">
+<a class ='boldbuttons' id="change_status" href='#' onClick="statusClickHandler()"><span>Update your status</span></a>
 <br>
 <br>
 <br>
@@ -236,10 +269,62 @@ function getAddress(latLng) {
   
 <div id = "frnd_upd" class="design"></div>
 <div id ="freq_d" title="Accept Request"></div>
-<div id ="fsug_d" title="Friend Suggestions"></div>
+
 
 <div id="map_canvas"></div>
   
-    
+<div id="fb-root"></div>
+<div id ="fsug_d" title="Friend Suggestions" style="display:none"><img src="ajax-loader.gif" alt="Loading ..."  /></div>
+<!-- For logging into Javascript API-->
+
+
+<script>
+	window.fbAsyncInit = function() {
+	FB.init({
+		appId : '129413090453935',
+		session : <?=json_encode($session)?>, // don't refetch the session when PHP already has it
+		status : true, // check login status
+		cookie : true, // enable cookies to allow the server to access the session
+		xfbml : true // parse XFBML
+	});
+	
+	// whenever the user logs in, we refresh the page
+	FB.Event.subscribe('auth.login', function() {
+		window.location.reload();
+	});
+	};
+	
+	(function() {
+		var e = document.createElement('script');
+		e.src = document.location.protocol + '//connect.facebook.net/en_US/all.js';
+		e.async = true;
+		document.getElementById('fb-root').appendChild(e);
+	}());
+	
+	/*Function to publish status updates to the user's wall*/
+	function feedHandler(message,loc) {
+		if (loc=="undefined"||(!loc))
+			loc="undefined location."
+		FB.ui(
+	   {
+	     method: 'feed',
+	     name: 'mapTheGraph',
+	     caption: 'Find where your friends are right now!',
+	     message: message + ' at ' + loc,
+	     actions: {
+	     			name: "Visit mapTheGraph",
+	     			link: "http://apps.facebook.com/maptg_one/"
+	     				}
+	     }, function(response) {
+			     if (response && response.post_id) {
+			       alert('Post was published.');
+			     } else {
+			       alert('Post was not published.');
+			     }
+			  }
+);
+		
+		}
+</script>
 </body>
 </html>

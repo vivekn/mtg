@@ -1,9 +1,4 @@
-
 <html>
-
-<LINK REL=StyleSheet HREF="design.css" TYPE="text/css" MEDIA=screen>
-<script type="text/javascript" src="js/jquery-1.4.2.min.js"></script>
-
 <div class = "design2">
 <?php
 	/*Code for accepting a friend request*/
@@ -22,8 +17,8 @@
 
 &nbsp;
 <br>
-<a id = "accept<?=$user?>" class ='boldbuttons' href='#' onClick=""><span>Accept</span></a>       
+<a id = "accept<?=$user?>" class ='boldbuttons' href='#' onclick="jQuery.post('acceptreq.php',{ sent_from:<?=$user?>,uid:<?=$self?>});jQuery('#freq_d<?=$user?>').dialog('close');"><span>Accept</span></a>       
                        
-<a id = "reject<?=$user?>" class ='boldbuttons' href='#'><span>Reject</span></a>	
+<a class ='boldbuttons' href='#' onclick="$('#freq_d<?=$user?>').dialog('close');"><span>Reject</span></a>	
 </div>													
 </html>

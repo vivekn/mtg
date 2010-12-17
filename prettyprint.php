@@ -1,26 +1,15 @@
 <?php
 /*Pretty printing library for time difference,status message,name etc*/
 
-include_once "boilerplate.php";
+function print_status($t){
+echo "Hello";
 
-function print_name($uid) {
-	
-	$query = "SELECT * FROM users1 WHERE uid = \"$me\"";
-	$r = db_query($query);
-	$t =  mysql_fetch_array($r);	
-	echo $t['name'];
-	mysql_close($r);
-	
-	}
-function print_status($uid){
-	$query = "SELECT * FROM users1 WHERE uid = \"$me\"";
-	$r = db_query($query);
-	$t =  mysql_fetch_array($r);	
-	echo $t['status'];
-	mysql_close($r);	
-	}
-function print_time_diff($time){
-	echo '<abbr class="timeago" title="'.$time.'"></abbr>';
-	}
+$maphtml = "<img src='http://graph.facebook.com/$me/picture/'  width='50' height='50' align='left'/><a> $t[name]</a><br><a class='status'> $t[status]</a><abbr class='timeago' title='$t[timestamp]'></abbr>";
+
+$html ="<img src='http://graph.facebook.com/$me/picture/'  width='50' height='50' align='left'/><a> $t[name]</a><br><a class='status' onclick = 'var latlngl = new google.maps.LatLng($t[lat], $t[lng]);var html = '$maphtml';addMarkerInfo(latlngl,html);'> $t[status] </a><abbr class='timeago' title='$t[timestamp]'s></abbr>	";
+
+echo $html;
+
+}
 
 ?>

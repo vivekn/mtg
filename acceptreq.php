@@ -5,9 +5,9 @@ include_once "boilerplate.php";
 function accept_friend($me,$sent_from,$invite_mode) {
 
 	if ($invite_mode)
-		$query1 = "DELETE * FROM invites WHERE (invited_by = \"$sent_from\" AND invited = \"$me\")";
+		$query1 = "DELETE FROM invites WHERE (invited_by = \"$sent_from\" AND invited = \"$me\")";
 	else
-		$query1 = "DELETE * FROM requests WHERE (sent_from = \"$sent_from\" AND sent_to = \"$me\")";
+		$query1 = "DELETE FROM requests WHERE (sent_from = \"$sent_from\" AND sent_to = \"$me\")";
 	
 	$exec = db_query($query1);	
 	

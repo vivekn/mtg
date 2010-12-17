@@ -2,6 +2,7 @@
     include_once "fbmain.php";
     
     if($fbme) {
+    	$is_first_time = true;
 		include_once "acceptreq.php";
 		$user_query = "SELECT * FROM users1 WHERE uid = \"$uid\"";
 		$temp1 = db_query($user_query);
@@ -21,15 +22,22 @@
 			}
 		else {
 			/* Code for friend requests */
-			$i = 0;
+			$is_first_time	= false;		
 			$query = "SELECT * FROM requests WHERE sent_to = \"$uid\"";
 			$r = db_query($query);
 			$friend_req_array = array();
 			while($friend = mysql_fetch_array($r))
-				$friend_req_array[$i++] = $friend['sent_from'];
-				
+				$friend_req_array[] = $friend['sent_from'];
+
+			/* Code for finding last set position of the user */			
+				$r2 = db_query("SELECT * FROM users1 WHERE uid = \"$uid\"");
+				$posn = mysql_fetch_array($r2);
 			}
-			include_once "mapbase4.php";
+			
+			if($is_first_time)
+				include_once "firsttime.php";
+			else 
+				include_once "mapbase4.php";
 		
 	}
 	 else 
