@@ -6,10 +6,9 @@ $lat = $_REQUEST['lat'];
 $lng = $_REQUEST['lng'];
 
 $mysqldate = date( 'Y-m-d H:i:s', time() );
-$phpdate = strtotime( $mysqldate );
 
 $query1 = "INSERT INTO updates VALUES (\"$me\",$lat,$lng,\"$msg\",$phpdate)";
-$query2 = "UPDATE users1 SET lat=$lat , lng=$lng , status = \"$msg\" , time = $phpdate WHERE uid = \"$me\"";
+$query2 = "UPDATE users1 SET lat=$lat , lng=$lng , status = \"$msg\" , time = $mysqldate WHERE uid = \"$me\"";
 $r = db_query($query1);
 $r1 = db_query($query2);
 if($r and $r1)

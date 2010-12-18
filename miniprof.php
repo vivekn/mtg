@@ -12,7 +12,7 @@
 
 $status = <<<STATUS
 <a class="status" onclick = "var latlngl = new google.maps.LatLng({$t['lat']}, {$t['lng']});var html = '{$t['status']}';addMarkerInfo(latlngl,html);map.setOptions({center: latlngl});"> {$t['status']} </a>
-<abbr class="timeago" title="{$t['time']}"></abbr>			
+<abbr class="timeago" title="{$t['time']}">{$t['time']}</abbr>			
 STATUS;
 	?>
  	<img src="http://graph.facebook.com/<?=$me?>/picture/" alt=" " width="50" height="50" align="right"/>
