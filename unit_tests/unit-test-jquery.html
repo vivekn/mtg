@@ -1,0 +1,20 @@
+<html>
+	<head>
+		<script type="text/javascript" src="js/jquery-1.4.2.min.js"></script>
+		<script type="text/javascript" >
+			$(document).ready(function () {
+				$(".Hello").click(function () {$("#foo").html("Hey There");});
+				});			
+			
+			function pageLoad() {
+				$("#test").load("test2.html");
+				//alert("reached here");			
+			}
+		</script>	
+	</head>
+	<body>
+		<p id="foo"></p>
+		<div id="test"></div>
+		<a href="#" onclick="pageLoad()" >Click Here</a>
+	</body>
+</html>

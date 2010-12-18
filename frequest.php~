@@ -17,7 +17,7 @@
 
 &nbsp;
 <br>
-<a id = "accept<?=$user?>" class ='boldbuttons' href='#' onclick="jQuery.post('acceptreq.php',{ uid1:<?=$self?>,uid2:<?=$user?>});jQuery('#freq_d<?=$user?>').dialog('close');"><span>Accept</span></a>       
+<a id = "accept<?=$user?>" class ='boldbuttons' href='#' onclick="jQuery.post('acceptreq.php',{ uid1:<?=$user?>,uid2:<?=$self?>});jQuery('#freq_d<?=$user?>').dialog('close');"><span>Accept</span></a>       
                        
 <a class ='boldbuttons' href='#' onclick="$('#freq_d<?=$user?>').dialog('close');"><span>Reject</span></a>	
 

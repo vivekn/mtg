@@ -54,7 +54,7 @@ $.ajaxSetup({
 
 $(document).ready(function(){
  
-
+  $('#frnd_upd').load('ffeed.php',"uid=<?=$uid?>&start=0");
   $('#apDiv1').load('miniprof.php',"uid=<?=$uid?>");
   $("#ShowHelp").show();
 	var suggest_dialog = '<div id ="fsug_d" title="Friend Suggestions"><img src="ajax-loader.gif" alt="Loading ..." /></div>'
@@ -71,7 +71,7 @@ $(document).ready(function(){
   echo "jQuery('#freq_d$sth').dialog('open');";
   }
 	?>
-	  $('#frnd_upd').load('ffeed.php',"uid=<?=$uid?>&start=0");
+
 });
 </script>
 <!-- jQuery Code ends here,Map code begins-->

@@ -1,6 +1,6 @@
   html { height: 100% }
   body {
-	height: 450px;
+	height: 500px;
 	margin: 0px;
 	padding: 0px;
 	width: 600px;

@@ -1,0 +1,65 @@
+<!--<html>
+
+
+<link rel="stylesheet" type="text/css" href="css/ui-lightness/jquery-ui-1.8.6.custom.css" media="screen"/>
+<script type="text/javascript" src="js/jquery-ui-1.8.6.custom.min.js">
+</script>
+<script type="text/javascript" src="js/jquery-1.4.2.min.js">
+</script>
+<body>
+<div id="dialog" title="Example dialog">
+	<p>Some text that you want to display to the user.</p>
+</div>
+<script type="text/javascript">
+$(document).ready( function() {
+							$("#dialog").dialog({
+      								bgiframe: true,
+									autoOpen: false,
+									height: 100,
+									modal: true
+    							});
+						    $('#dia').dialog('open');	});
+</script>
+
+<h1 style="font:'Lucida Sans Unicode', 'Lucida Grande', sans-serif">HO HO Ha HA HU</h1>
+<a href="#" onclick="$('#dialog').dialog('open'); return false">Click here to see the popup</a>
+</body>
+</html>-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html lang="en">
+<head>
+<link rel="stylesheet" type="text/css" href="css/ui-lightness/jquery-ui-1.8.6.custom.css">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>jQuery UI Dialog Example</title>
+<script type="text/javascript" src="js/jquery-1.4.2.min.js"></script>
+<script type="text/javascript" src="ui/jquery.ui.core.js"></script>
+<script type="text/javascript" src="ui/jquery.ui.widget.js"></script>
+<script type="text/javascript" src="ui/jquery.ui.dialog.js"></script>
+	<script src="ui/jquery.ui.mouse.js"></script>
+	<script src="ui/jquery.ui.draggable.js"></script>
+	<script src="ui/jquery.ui.position.js"></script>
+	<script src="ui/jquery.ui.resizable.js"></script>
+
+</head>
+<body>
+<h1 style="font:'Lucida Sans Unicode', 'Lucida Grande', sans-serif">HO HO Ha HA HU</h1>
+<a href="#" onclick="$('#dialog').dialog('open'); return false">Click here to see the popup</a>
+<div id="dialog" title="Example dialog">
+	<p>Some text that you want to display to the user.</p>
+    
+</div>
+<script type="text/javascript">
+$(document).ready( function() {
+							$("#dialog").dialog({
+      							//	bgiframe: true,
+									autoOpen: false,
+									height: 300,
+									left:200,
+									modal: true
+    							}).html("VIvek");
+						    	});
+</script>
+
+
+</body>
+</html>

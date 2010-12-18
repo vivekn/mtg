@@ -1,0 +1,50 @@
+<html>
+<head>
+<title>mapTheGraph</title>
+</head>
+<style type="text/css">
+body {
+background-image: url('mapthegraph.jpg');
+font:"Lucida Sans Unicode", "Lucida Grande", sans-serif;
+font-size: 20pt;
+}
+
+a:hover 
+{
+background-color: green;
+color: white;
+text-decoration: underline;
+font-size: 60pt;
+}
+
+a {
+background-color: green;
+color: white;
+text-decoration: none;
+font-size: 36pt;
+}
+
+</style>
+<body>
+
+<h1> Hello , <?php echo $fbme['first_name']?></h1>
+
+<br>
+<br>
+<br>
+
+ 
+
+<p1> mapTheGraph is a whole new experience of social networking.</p1>
+<br>
+<p2> Update your status.Share the interesting places you have been to lately.</p2>
+<br>
+<p3> Get updates from your friends.</p3>
+<br><br><br><br><br>
+<a onclick='window.location="./index.php"' href="#">Hop aboard!</a>	
+
+ 
+ 
+
+</body>
+</html>
