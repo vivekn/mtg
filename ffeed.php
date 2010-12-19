@@ -35,4 +35,7 @@ if(mysql_num_rows($r)>($start+5))
 	echo '<a id="next" onclick = "$("#frnd_upd").load("ffeed.php","uid=$uid&start={$start+5}");">next</a>';
 
 ?>
+<script type="text/javascript" >
+	  $('abbr.timeago').timeago();
+</script>
 </html>

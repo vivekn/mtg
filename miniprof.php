@@ -1,6 +1,7 @@
 
 <html>
 <LINK REL=StyleSheet HREF="design.css" TYPE="text/css" MEDIA=screen>
+
     <div class="design">
      <?php
     	include "boilerplate.php";
@@ -11,7 +12,7 @@
 		$t =  mysql_fetch_array($r);
 
 $status = <<<STATUS
-<a class="status" onclick = "var latlngl = new google.maps.LatLng({$t['lat']}, {$t['lng']});var html = '{$t['status']}';addMarkerInfo(latlngl,html);map.setOptions({center: latlngl});"> {$t['status']} </a>
+<a class="status" onload = "var latlngl = new google.maps.LatLng({$t['lat']}, {$t['lng']});var html = '{$t['status']}';addMarkerInfo(latlngl,html);$('abbr.timeago').timeago();" onclick="map.setOptions({center: latlngl});"> {$t['status']} </a>
 <abbr class="timeago" title="{$t['time']}">{$t['time']}</abbr>			
 STATUS;
 	?>
@@ -24,6 +25,8 @@ STATUS;
     <a id="invlnk" href="#" onclick="jQuery('#fsug_d').dialog({modal:true,minHeight: 300}).load('inv2.php');$('#invlink').hide();">Invite/Add Friends</a>
     </div>
 <HR>
-   
+<script type="text/javascript" >
+	  $('abbr.timeago').timeago();
+</script>
 </html>
 

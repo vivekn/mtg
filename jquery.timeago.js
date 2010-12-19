@@ -1,4 +1,5 @@
 /*
+ * 
  * timeago: a jQuery plugin, version: 0.9.2 (2010-09-14)
  * @requires jQuery v1.2.3 or later
  *
@@ -10,7 +11,7 @@
  *
  * Licensed under the MIT:
  * http://www.opensource.org/licenses/mit-license.php
- *
+ *	
  * Copyright (c) 2008-2010, Ryan McGeary (ryanonjavascript -[at]- mcgeary [*dot*] org)
  */
 (function($) {
@@ -20,7 +21,7 @@
     else return inWords($.timeago.datetime(timestamp));
   };
   var $t = $.timeago;
-
+		  
   $.extend($.timeago, {
     settings: {
       refreshMillis: 60000,
@@ -30,7 +31,7 @@
         prefixFromNow: null,
         suffixAgo: "ago",
         suffixFromNow: "from now",
-        seconds: "less than a minute",
+        seconds: "a few seconds",
         minute: "about a minute",
         minutes: "%d minutes",
         hour: "about an hour",
@@ -45,6 +46,8 @@
       }
     },
     inWords: function(distanceMillis) {
+   
+		
       var $l = this.settings.strings;
       var prefix = $l.prefixAgo;
       var suffix = $l.suffixAgo;
@@ -132,10 +135,14 @@
   }
 
   function distance(date) {
-    return (new Date().getTime() - date.getTime());
+  	 // Adding a modification to support different time zones if the server time zone is GMT [Vivek Narayanan]
+	 var d = new Date();
+	 var diff = d.getTimezoneOffset()*60000; // get difference in milliseconds from GMT
+    return (new Date().getTime() - (date.getTime()-diff) );
   }
 
   // fix for IE6 suckage
   document.createElement("abbr");
   document.createElement("time");
 })(jQuery);
+

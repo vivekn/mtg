@@ -8,18 +8,20 @@ a.newfield:hover {
 background-color: red;
 color: white; 
 text-decoration: none;
-right: 20px;
+float: right;
+border:2px solid;
+margin-bottom: 2px;
 }
 
 a.newfield {
-background-color: gray;
+background-color: white;
 color: black;
 text-decoration: none;
-right: 20px;
+float: right;
+border:2px solid; 
+margin-bottom: 2px;
 }
-newfield{
-background-color: lime;	
-	}
+
 </style>
 </head>
 <body>
@@ -63,7 +65,7 @@ background-color: lime;
    $print_or_not = false;  
    $items=0;//tracks the number of friends printed
    if (is_array($_friends) && count($_friends)) {  
-		$html = "<a>Some of your friends are already on mapTheGraph. Would you like to add them ?</a><br><br>";     
+		$html = "<h4>Some of your friends are already on mapTheGraph. Would you like to add them ?</h4><br>";     
         foreach($_friends as $friend) {  
         
         	$q = db_query("SELECT * FROM connections WHERE uid1 = $uid AND uid2 = $friend[uid]");
@@ -84,7 +86,7 @@ $limit = count($other_friends)>5?5:count($other_friends);
 if($limit) {
 	$keys = array_rand($other_friends,$limit);//array to store the random numbers
 
-	echo "<br> <p>Would you like to expand your graph by adding these people?</p><br>";
+	echo "<h4>Would you like to expand your graph by adding these people?</h4><br>";
 	
 	foreach ($keys as $new_friend)  {
 		echo "<span class='newfield'>{$other_friends[$new_friend]['name']} <a class = 'newfield' name='{$other_friends[$new_friend]['uid']}' href ='#'>Invite</a><br></span>";

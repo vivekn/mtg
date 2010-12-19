@@ -14,14 +14,14 @@
 <script src="ui/jquery.ui.draggable.js"></script>
 <script src="ui/jquery.ui.position.js"></script>
 <script src="ui/jquery.ui.resizable.js"></script>
-<script type="text/javascript" src = "jquery.timeago.js"></script>
+
 <LINK REL=StyleSheet HREF="design.css" TYPE="text/css" MEDIA="screen">
 
 </script>
 <script type="text/javascript"
     src="js/jquery-ui-1.8.6.custom.min.js">
 </script>
-
+<script type="text/javascript" src = "jquery.timeago.js"></script>
 <!-- jQuery Code starts here-->
 <script type="text/javascript">
 
@@ -72,6 +72,7 @@ $(document).ready(function(){
   }
 	?>
 	  $('#frnd_upd').load('ffeed.php',"uid=<?=$uid?>&start=0");
+
 });
 </script>
 <!-- jQuery Code ends here,Map code begins-->
@@ -88,10 +89,7 @@ $(document).ready(function(){
  
  
   var map,geocoder,info,smode=false,markersArray=[],k=0;
-  $("boldbuttons").click(function() {
-								  notif();
-								  event.preventDefault();
-								  });
+  
  
   function addMarker(location) {
   marker = new google.maps.Marker({
@@ -165,6 +163,9 @@ function deleteOverlays() {
 			 var span = document.createElement("a");
 			 span.setAttribute('id','status_upd');
 			 span.onclick =   function () {
+			 		var foo = new Date; // Generic JS date object
+					var unixtime_ms = foo.getTime(); // Returns milliseconds since the epoch
+					var unixtime = parseInt(unixtime_ms / 1000);
 				 addMarker2(event.latLng);
 				 var msg = $("#st_text").val();
 				 $.post('./setstatus.php',{ //check jQuery docs for this
@@ -175,6 +176,7 @@ function deleteOverlays() {
 											}, function (data) {
 													var loc = getAddress(event.latLng);
 													feedHandler(msg,loc); });
+													info.close();
 				 }
 			 span.setAttribute('class','boldbuttons');
 			 span.setAttribute('href','#');

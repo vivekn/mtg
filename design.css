@@ -101,3 +101,17 @@ left: 10%;
 #next {
 right: 10%;
 }
+
+/* for time elapsed messages */
+.timeago {
+font-size: 7pt;
+color: gray;	
+	}
+/* for status updates in friend feed*/
+.status {
+font-size: 9pt;
+color: brown;
+border-bottom-style: dotted;
+border-bottom-width: 1px;
+text-decoration: none;
+}
