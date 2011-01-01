@@ -7,6 +7,7 @@
 		include_once "acceptreq.php";
 		$user_query = "SELECT * FROM users1 WHERE uid = \"$uid\"";
 		$temp1 = db_query($user_query);
+		
 		$check = mysql_fetch_array($temp1);
 		if (!$check){
 			

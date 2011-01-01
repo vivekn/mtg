@@ -10,7 +10,7 @@ $lat = $_REQUEST['lat'];
 $lng = $_REQUEST['lng'];
 
 
-$mysqldate = date('Y-m-d H:i:s');//Gets the current server time and converts it to MySQL format.
+$mysqldate = date('Y-m-d H:i:s');
 
 $query1 = "INSERT INTO updates VALUES (\"$me\",$lat,$lng,\"$msg\",\"$mysqldate\")";
 $query2 = "UPDATE users1 SET lat=$lat , lng=$lng , status = \"$msg\" , time = \"$mysqldate\" WHERE uid = \"$me\"";

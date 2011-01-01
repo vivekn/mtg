@@ -6,22 +6,26 @@
 <style type="text/css">
 a.newfield:hover {
 background-color: red;
-text-decoration: none;
 color: white; 
+text-decoration: none;
+float: right;
+border:2px solid;
+margin-bottom: 2px;
 }
 
 a.newfield {
 background-color: white;
-color: red;
-border-bottom: dotted 1px;
+color: black;
+text-decoration: none;
 float: right;
 border:2px solid; 
-margin: 2px;
+margin-bottom: 2px;
 }
 
 </style>
 </head>
 <body>
+<h4>Invite your friends to mapTheGraph</h4>
 <script type="text/javascript" src="js/jquery-1.4.2.min.js"></script>
 <script type="text/javascript" >
 //Event handlers for Add and Invite buttons generated below
@@ -68,18 +72,58 @@ margin: 2px;
         	$q = db_query("SELECT * FROM connections WHERE uid1 = $uid AND uid2 = $friend[uid]");
         	if ((!mysql_num_rows($q))&&$items<4) {
         		$print_or_not =true;
-        		$html = $html . "<div class='newfield'>$friend[name]<a class = 'newfield' name='$friend[uid]' href ='#'>Add</a></div><br>";
+        		$html = $html . "<span class='newfield'>$friend[name]<a class = 'newfield' name='$friend[uid]' href ='#'>Add</a></span><br>";
         		$items++;
         		}
              
        }  
    }
-   if($print_or_not)
-   	echo $html;
-   	echo "<div style = 'clear: both;'></div>";      
- 
-
+        
+ 	$friends = array(); 
+	foreach ($_friends as $friend) {  
+           $friends[] = $friend['uid'];  
+       }  
+   $excl = implode(',', $friends);  
 ?>
+   	
+<div id="fb-root"></div>
+<fb:serverfbml>
+  <script type="text/fbml" >
 
+
+     <fb:request-form action="<?=$fbconfig['baseUrl']?>proc_inv.php" method="POST" invite="true" type="mapTheGraph!" 
+       content="Hi, I am using mapTheGraph, an app that lets you follow the cool places I've been to and where I am on a map.I would like to add you to my graph!.">
+     <fb:multi-friend-selector actiontext="Invite your friends to use this app."  exclude_ids = "<?=$excl?>"/> 
+  
+  </fb:request-form>
+</script>
+  </fb:serverfbml>
+  
+  <script>
+	window.fbAsyncInit = function() {
+	FB.init({
+		appId : '129413090453935',
+		session : <?=json_encode($session)?>, // don't refetch the session when PHP already has it
+		status : true, // check login status
+		cookie : true, // enable cookies to allow the server to access the session
+		xfbml : true // parse XFBML
+	});
+	
+	// whenever the user logs in, we refresh the page
+	FB.Event.subscribe('auth.login', function() {
+		window.location.reload();
+	});
+	};
+	
+	(function() {
+		var e = document.createElement('script');
+		e.src = document.location.protocol + '//connect.facebook.net/en_US/all.js';
+		e.async = true;
+		document.getElementById('fb-root').appendChild(e);
+	}());
+	
+	
+	
+</script>
 </body>
 </html>

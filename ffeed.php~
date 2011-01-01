@@ -36,9 +36,9 @@ echo '<p>It seems like you have no friends using this app yet!. Would you like t
 	}
 /*for creating a page mechanism*/
 if($start!=0)
-	echo '<a id="prev" href = "#" onclick = \'$("#frnd_upd").load("ffeed.php","uid=$uid&start={$start-3}");\'>prev</a>';
+	echo '<a id="prev" onclick = \'$("#frnd_upd").load("ffeed.php","uid=$uid&start={$start-3}");\'>prev</a>';
 if(mysql_num_rows($r)>($start+3))
-	echo '<a id="next" href = "#" onclick = \'$("#frnd_upd").load("ffeed.php","uid=$uid&start={$start+3}");\'>next</a>';
+	echo '<a id="next" onclick = \'$("#frnd_upd").load("ffeed.php","uid=$uid&start={$start+3}");\'>next</a>';
 
 ?>
 <script type="text/javascript" >

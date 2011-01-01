@@ -20,6 +20,6 @@ function accept_friend($me,$sent_from,$invite_mode,$accepted) {
 	}
 }
 
-if ( isset($_REQUEST['uid1']) && isset($_REQUEST['uid2']) && isset($_REQUEST['accepted']) && ($_REQUEST['uid1']) && ($_REQUEST['uid2']) ) 
-	accept_friend($_REQUEST['uid1'],$_REQUEST['uid2'],false,$_REQUEST['accepted']);
+if ( isset($_REQUEST['uid1']) && isset($_REQUEST['uid2']) && ($_REQUEST['uid1']) && ($_REQUEST['uid2']) ) 
+	accept_friend($_REQUEST['uid1'],$_REQUEST['uid2'],false);
 ?>

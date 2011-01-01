@@ -14,7 +14,7 @@ function addToMap(uid,uname,ustatus,utime,lat,lng) {
 /*Pretty printing library for status message,name etc*/
 
 function print_update($t) {
-	$namehtml ="<br><img src='http://graph.facebook.com/$t[uid]/picture/'  width='35' height='35' align='left'/><a> $t[name]</a><br>";
+	$namehtml ="<img src='http://graph.facebook.com/$t[uid]/picture/'  width='35' height='35' align='left'/><a> $t[name]</a><br>";
 	echo $namehtml;
 	print_status($t);
 }
