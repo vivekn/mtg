@@ -40,6 +40,7 @@ margin: 2px;
     <?php  
 
 	include_once "boilerplate.php";
+	include_once "acceptreq.php";
 	
     // Retrieve array of friends who've already added the app.  
    $fql = 'SELECT uid,name FROM user WHERE uid IN (SELECT uid2 FROM friend WHERE uid1='.$uid.') AND has_added_app = 1';
@@ -77,7 +78,23 @@ margin: 2px;
    if($print_or_not)
    	echo $html;
    	echo "<div style = 'clear: both;'></div>";      
- 
+    
+    function auto_add_friends() {
+         // Retrieve array of friends who've already added the app.  
+       $fql_a = 'SELECT uid,name FROM user WHERE uid IN (SELECT uid2 FROM friend WHERE uid1='.$uid.') AND has_added_app = 1';
+       $app_friends = $facebook->api(array(  
+ 						'method' => 'fql.query',  
+ 						'query' =>$fql_a, 
+ 						'callback' => ''
+							)); 
+	   foreach ($app_friends as $friend) {
+	       $q = db_query("SELECT * FROM connections WHERE uid1 = $uid AND uid2 = $friend[uid]");
+        	  if ((!mysql_num_rows($q))&&$items<4) {
+               $q = db_query("INSERT INTO requests VALUES (\"$friend[uid]\",\"$uid\")");
+               accept_friend($friend[uid],$uid,false,true);       	      
+        	      }
+    	}
+    }
 
 ?>
 
