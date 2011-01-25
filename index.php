@@ -1,10 +1,14 @@
 <?php
     include_once "fbmain.php";
+    include_once "acceptreq.php";
+
     /*Controller file for preparing the app,when the user logs in*/
     /*TODO: Add random invite code*/
+   
+
+    
     if($fbme) {
     	$is_first_time = true;
-		include_once "acceptreq.php";
 		$user_query = "SELECT * FROM users1 WHERE uid = \"$uid\"";
 		$temp1 = db_query($user_query);
 		$check = mysql_fetch_array($temp1);
@@ -23,6 +27,23 @@
 			}
 		else {
 			/* Code for friend requests */
+			
+			/* Code for auto adding friends */
+			$fql_a = 'SELECT uid,name FROM user WHERE uid IN (SELECT uid2 FROM friend WHERE uid1='.$uid.') AND has_added_app = 1';
+       $app_friends = $facebook->api(array(  
+ 						'method' => 'fql.query',  
+ 						'query' =>$fql_a, 
+ 						'callback' => ''
+							)); 
+	   foreach ($app_friends as $friend) {
+	       $q = db_query("SELECT * FROM connections WHERE uid1 = $uid AND uid2 = $friend[uid]");
+        	  if ((!mysql_num_rows($q))) {
+               $q = db_query("INSERT INTO requests VALUES (\"$friend[uid]\",\"$uid\")");
+               accept_friend($friend['uid'],$uid,false,true);       	      
+        	      }
+    	}
+			
+			/* Code for registering user*/
 			$is_first_time	= false;		
 			$query = "SELECT * FROM requests WHERE sent_to = \"$uid\"";
 			$r = db_query($query);

@@ -1,49 +1,60 @@
 <html>
-
 <?php
 /* The friend feed , ie , status and location updates of friends */
 
 include_once "boilerplate.php";
 include_once "fbmain.php";
-include_once "prettyprint.php";	
+include_once "prettyprint.php"; 
 $me = $_REQUEST['uid'];
 $start = $_REQUEST['start'];
 
 echo "<p>Updates from friends</p>";
 
 if($start<=0) // if the page start index is negative, reset it.
-	$start=0;
+        $start=0;
 
-$query1 = "SELECT uid,lat,lng,status,timestamp FROM updates WHERE uid IN  (SELECT uid2 FROM connections WHERE uid1 = \"$me\") ORDER BY timestamp DESC";
+$upper_limit = $start + 6;
+$query1 = "SELECT uid,lat,lng,status,timestamp,tag FROM updates WHERE uid IN  (SELECT uid2 FROM connections WHERE uid1 = \"$me\") ORDER BY timestamp DESC LIMIT $start, $upper_limit";
 $r = db_query($query1);
 
 $i=0;
 
-/*Fetches 3 latest updates from the user's friends*/
-for($i=$start;$i<($start+3);$i++) {
-	$result = mysql_fetch_array($r);
-	$r2 = db_query("SELECT * FROM users1 WHERE uid = \"$result[uid]\"");
-	$res2 = mysql_fetch_array($r2);
-	
-	if(!$result)
-		break;
-	$result['name'] = $res2['name'];
-	print_update($result);
-	}
+/*Fetches 6 latest updates from the user's friends*/
+for($i=$start;$i<($start+6);$i++) {
+        $result = mysql_fetch_array($r);
+        $r2 = db_query("SELECT * FROM users1 WHERE uid = \"$result[uid]\"");
+        $res2 = mysql_fetch_array($r2);
+        $r3 = db_query("SELECT image FROM tags WHERE name = \"$result[tag]\"");
+        $res3 = mysql_fetch_array($r3);
+        if(!$result)
+                break;
+        $result['name'] = $res2['name'];
+        $result['img'] = $res3['image'];
+        print_update($result);
+        }
+        
+        
 if(!$i) {
-echo '<p>It seems like you have no friends using this app yet!. Would you like to <a href="#" onclick="$(\'#fsug_d\').dialog({modal:true,minHeight: 250}).load(\'inv2.php\');">add</a> them or <a href = "inv3.php" target = "_top">invite</a> some?</p>';	
-	
-	}
+echo '<p>It seems like you have no friends using this app yet!. Would you like to <a href = "inv3.php" target = "_top">invite</a> some?</p>';   
+        
+        }
+        
+        
 /*for creating a page mechanism*/
-if($start!=0)
-	echo '<a id="prev" href = "#" onclick = \'$("#frnd_upd").load("ffeed.php","uid=$uid&start='.($start-3).';\'>prev</a>';
-if(mysql_num_rows($r)>($start+3))
-	echo '<a id="next" href = "#" onclick = \'$("#frnd_upd").load("ffeed.php","uid=$uid&start='.($start+3).'");\'>next</a>';
+
+// dummy query to get no of rows
+$query1 = "SELECT * FROM updates WHERE uid IN  (SELECT uid2 FROM connections WHERE uid1 = \"$me\")";
+$r = db_query($query1);
+
+if($start!=0){
+        echo '<a id="prev" href = "#" onclick = \'$("#frnd_upd").load("ffeed.php","uid='.$uid.'&start='.($start-6).'");\';\'>prev</a>';}
+if(mysql_num_rows($r)>($start+6))
+        echo '<a id="next" href = "#" onclick = \'$("#frnd_upd").load("ffeed.php","uid='.$uid.'&start='.($start+6).'");\'>next</a>';
 
 ?>
 <script type="text/javascript" >
 $(document).ready(function () {
-	$("abbr.timeago").timeago();
-	});
+        $("abbr.timeago").timeago();
+        });
 </script>
 </html>

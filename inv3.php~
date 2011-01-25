@@ -1,128 +1,516 @@
 <?php
+cceptreq.php
+cceptreq.php
+cceptreq.php
 	include_once "fbmain.php";
+cceptreq.php
+cceptreq.php
+cceptreq.php
 ?>
+cceptreq.php
+cceptreq.php
+cceptreq.php
 <html xmlns:fb="http://www.facebook.com/2008/fbml">
+cceptreq.php
+cceptreq.php
+cceptreq.php
 <head>
+cceptreq.php
+cceptreq.php
+cceptreq.php
 <style type="text/css">
+cceptreq.php
+cceptreq.php
+cceptreq.php
 a.newfield:hover {
+cceptreq.php
+cceptreq.php
+cceptreq.php
 background-color: red;
+cceptreq.php
+cceptreq.php
+cceptreq.php
 color: white; 
+cceptreq.php
+cceptreq.php
+cceptreq.php
 text-decoration: none;
+cceptreq.php
+cceptreq.php
+cceptreq.php
 float: right;
+cceptreq.php
+cceptreq.php
+cceptreq.php
 border:2px solid;
+cceptreq.php
+cceptreq.php
+cceptreq.php
 margin-bottom: 2px;
+cceptreq.php
+cceptreq.php
+cceptreq.php
 }
+cceptreq.php
+cceptreq.php
+cceptreq.php
 
+cceptreq.php
+cceptreq.php
+cceptreq.php
 a.newfield {
+cceptreq.php
+cceptreq.php
+cceptreq.php
 background-color: white;
+cceptreq.php
+cceptreq.php
+cceptreq.php
 color: black;
+cceptreq.php
+cceptreq.php
+cceptreq.php
 text-decoration: none;
+cceptreq.php
+cceptreq.php
+cceptreq.php
 float: right;
+cceptreq.php
+cceptreq.php
+cceptreq.php
 border:2px solid; 
+cceptreq.php
+cceptreq.php
+cceptreq.php
 margin-bottom: 2px;
+cceptreq.php
+cceptreq.php
+cceptreq.php
 }
+cceptreq.php
+cceptreq.php
+cceptreq.php
 
+cceptreq.php
+cceptreq.php
+cceptreq.php
 </style>
+cceptreq.php
+cceptreq.php
+cceptreq.php
 </head>
+cceptreq.php
+cceptreq.php
+cceptreq.php
 <body>
+cceptreq.php
+cceptreq.php
+cceptreq.php
 <h4>Invite your friends to mapTheGraph</h4>
+cceptreq.php
+cceptreq.php
+cceptreq.php
 <script type="text/javascript" src="js/jquery-1.4.2.min.js"></script>
+cceptreq.php
+cceptreq.php
+cceptreq.php
 <script type="text/javascript" >
+cceptreq.php
+cceptreq.php
+cceptreq.php
 //Event handlers for Add and Invite buttons generated below
+cceptreq.php
+cceptreq.php
+cceptreq.php
 	$(document).ready(function () {	
+cceptreq.php
+cceptreq.php
+cceptreq.php
 	$('.newfield').click( function () {
+cceptreq.php
+cceptreq.php
+cceptreq.php
 		$(this).hide('slow');		
+cceptreq.php
+cceptreq.php
+cceptreq.php
 		var friendId = $(this).attr('name');		
+cceptreq.php
+cceptreq.php
+cceptreq.php
 		$.post('createreq.php',{
+cceptreq.php
+cceptreq.php
+cceptreq.php
 										uid:<?php echo $uid;?>,
+cceptreq.php
+cceptreq.php
+cceptreq.php
 										sent_to:friendId
+cceptreq.php
+cceptreq.php
+cceptreq.php
 											});
+cceptreq.php
+cceptreq.php
+cceptreq.php
 		});
+cceptreq.php
+cceptreq.php
+cceptreq.php
 		}
+cceptreq.php
+cceptreq.php
+cceptreq.php
 		);
+cceptreq.php
+cceptreq.php
+cceptreq.php
 </script>
+cceptreq.php
+cceptreq.php
+cceptreq.php
     <?php  
+cceptreq.php
+cceptreq.php
+cceptreq.php
 
+cceptreq.php
+cceptreq.php
+cceptreq.php
 	include_once "boilerplate.php";
+cceptreq.php
+cceptreq.php
+cceptreq.php
 	
+cceptreq.php
+cceptreq.php
+cceptreq.php
     // Retrieve array of friends who've already added the app.  
+cceptreq.php
+cceptreq.php
+cceptreq.php
    $fql = 'SELECT uid,name FROM user WHERE uid IN (SELECT uid2 FROM friend WHERE uid1='.$uid.') AND has_added_app = 1';
+cceptreq.php
+cceptreq.php
+cceptreq.php
     // Retrieve array of friends who've not added the app.  
+cceptreq.php
+cceptreq.php
+cceptreq.php
    $fql2 = 'SELECT uid,name FROM user WHERE uid IN (SELECT uid2 FROM friend WHERE uid1='.$uid.') AND has_added_app = 0'; 
+cceptreq.php
+cceptreq.php
+cceptreq.php
    $_friends = $facebook->api(array(  
+cceptreq.php
+cceptreq.php
+cceptreq.php
  						'method' => 'fql.query',  
+cceptreq.php
+cceptreq.php
+cceptreq.php
  						'query' =>$fql, 
+cceptreq.php
+cceptreq.php
+cceptreq.php
  						'callback' => ''
+cceptreq.php
+cceptreq.php
+cceptreq.php
 							));  
+cceptreq.php
+cceptreq.php
+cceptreq.php
 	shuffle($_friends);
+cceptreq.php
+cceptreq.php
+cceptreq.php
    $other_friends = $facebook->api(array(  
+cceptreq.php
+cceptreq.php
+cceptreq.php
  						'method' => 'fql.query',  
+cceptreq.php
+cceptreq.php
+cceptreq.php
  						'query' =>$fql2, 
+cceptreq.php
+cceptreq.php
+cceptreq.php
  						'callback' => ''  
+cceptreq.php
+cceptreq.php
+cceptreq.php
 							));  
+cceptreq.php
+cceptreq.php
+cceptreq.php
 
+cceptreq.php
+cceptreq.php
+cceptreq.php
 
+cceptreq.php
+cceptreq.php
+cceptreq.php
   
+cceptreq.php
+cceptreq.php
+cceptreq.php
    $print_or_not = false;  // for the case if none of the user's friends have added the app.
+cceptreq.php
+cceptreq.php
+cceptreq.php
    $items=0;//tracks the number of friends printed
+cceptreq.php
+cceptreq.php
+cceptreq.php
    if (is_array($_friends) && count($_friends)) {  
+cceptreq.php
+cceptreq.php
+cceptreq.php
 		$html = "<h4>Some of your friends are already on mapTheGraph. Would you like to add them ?</h4><br>";     
+cceptreq.php
+cceptreq.php
+cceptreq.php
         foreach($_friends as $friend) {  
+cceptreq.php
+cceptreq.php
+cceptreq.php
         
+cceptreq.php
+cceptreq.php
+cceptreq.php
         	$q = db_query("SELECT * FROM connections WHERE uid1 = $uid AND uid2 = $friend[uid]");
+cceptreq.php
+cceptreq.php
+cceptreq.php
         	if ((!mysql_num_rows($q))&&$items<4) {
+cceptreq.php
+cceptreq.php
+cceptreq.php
         		$print_or_not =true;
+cceptreq.php
+cceptreq.php
+cceptreq.php
         		$html = $html . "<span class='newfield'>$friend[name]<a class = 'newfield' name='$friend[uid]' href ='#'>Add</a></span><br>";
+cceptreq.php
+cceptreq.php
+cceptreq.php
         		$items++;
+cceptreq.php
+cceptreq.php
+cceptreq.php
         		}
+cceptreq.php
+cceptreq.php
+cceptreq.php
              
+cceptreq.php
+cceptreq.php
+cceptreq.php
        }  
+cceptreq.php
+cceptreq.php
+cceptreq.php
    }
+cceptreq.php
+cceptreq.php
+cceptreq.php
         
+cceptreq.php
+cceptreq.php
+cceptreq.php
  	$friends = array(); 
+cceptreq.php
+cceptreq.php
+cceptreq.php
 	foreach ($_friends as $friend) {  
+cceptreq.php
+cceptreq.php
+cceptreq.php
            $friends[] = $friend['uid'];  
+cceptreq.php
+cceptreq.php
+cceptreq.php
        }  
+cceptreq.php
+cceptreq.php
+cceptreq.php
    $excl = implode(',', $friends);  
+cceptreq.php
+cceptreq.php
+cceptreq.php
 ?>
+cceptreq.php
+cceptreq.php
+cceptreq.php
    	
+cceptreq.php
+cceptreq.php
+cceptreq.php
 <div id="fb-root"></div>
+cceptreq.php
+cceptreq.php
+cceptreq.php
 <fb:serverfbml>
+cceptreq.php
+cceptreq.php
+cceptreq.php
   <script type="text/fbml" >
+cceptreq.php
+cceptreq.php
+cceptreq.php
 
+cceptreq.php
+cceptreq.php
+cceptreq.php
 
+cceptreq.php
+cceptreq.php
+cceptreq.php
      <fb:request-form action="<?=$fbconfig['baseUrl']?>proc_inv.php" method="POST" invite="true" type="mapTheGraph!" 
+cceptreq.php
+cceptreq.php
+cceptreq.php
        content="Hi, I am using mapTheGraph, an app that lets you follow the cool places I've been to and where I am on a map.I would like to add you to my graph!.">
+cceptreq.php
+cceptreq.php
+cceptreq.php
      <fb:multi-friend-selector actiontext="Invite your friends to use this app."  exclude_ids = "<?=$excl?>"/> 
+cceptreq.php
+cceptreq.php
+cceptreq.php
   
+cceptreq.php
+cceptreq.php
+cceptreq.php
   </fb:request-form>
+cceptreq.php
+cceptreq.php
+cceptreq.php
 </script>
+cceptreq.php
+cceptreq.php
+cceptreq.php
   </fb:serverfbml>
+cceptreq.php
+cceptreq.php
+cceptreq.php
   
+cceptreq.php
+cceptreq.php
+cceptreq.php
   <script>
+cceptreq.php
+cceptreq.php
+cceptreq.php
 	window.fbAsyncInit = function() {
+cceptreq.php
+cceptreq.php
+cceptreq.php
 	FB.init({
+cceptreq.php
+cceptreq.php
+cceptreq.php
 		appId : '129413090453935',
+cceptreq.php
+cceptreq.php
+cceptreq.php
 		session : <?=json_encode($session)?>, // don't refetch the session when PHP already has it
+cceptreq.php
+cceptreq.php
+cceptreq.php
 		status : true, // check login status
+cceptreq.php
+cceptreq.php
+cceptreq.php
 		cookie : true, // enable cookies to allow the server to access the session
+cceptreq.php
+cceptreq.php
+cceptreq.php
 		xfbml : true // parse XFBML
+cceptreq.php
+cceptreq.php
+cceptreq.php
 	});
+cceptreq.php
+cceptreq.php
+cceptreq.php
 	
+cceptreq.php
+cceptreq.php
+cceptreq.php
 	// whenever the user logs in, we refresh the page
+cceptreq.php
+cceptreq.php
+cceptreq.php
 	FB.Event.subscribe('auth.login', function() {
+cceptreq.php
+cceptreq.php
+cceptreq.php
 		window.location.reload();
+cceptreq.php
+cceptreq.php
+cceptreq.php
 	});
+cceptreq.php
+cceptreq.php
+cceptreq.php
 	};
+cceptreq.php
+cceptreq.php
+cceptreq.php
 	
+cceptreq.php
+cceptreq.php
+cceptreq.php
 	(function() {
+cceptreq.php
+cceptreq.php
+cceptreq.php
 		var e = document.createElement('script');
+cceptreq.php
+cceptreq.php
+cceptreq.php
 		e.src = document.location.protocol + '//connect.facebook.net/en_US/all.js';
+cceptreq.php
+cceptreq.php
+cceptreq.php
 		e.async = true;
+cceptreq.php
+cceptreq.php
+cceptreq.php
 		document.getElementById('fb-root').appendChild(e);
+cceptreq.php
+cceptreq.php
+cceptreq.php
 	}());
+cceptreq.php
+cceptreq.php
+cceptreq.php
 	
+cceptreq.php
+cceptreq.php
+cceptreq.php
 	
+cceptreq.php
+cceptreq.php
+cceptreq.php
+	
+cceptreq.php
+cceptreq.php
+cceptreq.php
 </script>
+cceptreq.php
+cceptreq.php
+cceptreq.php
 </body>
+cceptreq.php
+cceptreq.php
+cceptreq.php
 </html>
+cceptreq.php
+cceptreq.php
+cceptreq.php

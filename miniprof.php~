@@ -21,8 +21,7 @@
 	<p>
    <?php print_status($t); ?>
     </p>
-    <a id="invlnk" href="#" onclick="jQuery('#fsug_d').dialog({modal:true,minHeight: 250}).load('inv2.php');$('#invlink').hide();">Add Friends</a>
-    <a href="inv3.php" target="_blank" style="float: right;">Invite Friends</a>
+    <a href="inv3.php" target="_top" style="float: right;">Invite Friends</a>
     </div>
 <HR>
 <script type="text/javascript" >

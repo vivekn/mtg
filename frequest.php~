@@ -1,26 +1,104 @@
 <html>
+cceptreq.php
+cceptreq.php
+cceptreq.php
 
+cceptreq.php
+cceptreq.php
+cceptreq.php
 <?php
+cceptreq.php
+cceptreq.php
+cceptreq.php
 	/*Code for accepting a friend request*/
+cceptreq.php
+cceptreq.php
+cceptreq.php
 
+cceptreq.php
+cceptreq.php
+cceptreq.php
 	$user = $_REQUEST['uid']; //The user who sent the friend request.
+cceptreq.php
+cceptreq.php
+cceptreq.php
 	$self = $_REQUEST['me']; //The current user.
+cceptreq.php
+cceptreq.php
+cceptreq.php
 	include "boilerplate.php";
+cceptreq.php
+cceptreq.php
+cceptreq.php
 	
+cceptreq.php
+cceptreq.php
+cceptreq.php
 	//Get name of the other user.
+cceptreq.php
+cceptreq.php
+cceptreq.php
 	$query1 = "SELECT name FROM users1 WHERE uid = \"$user\"";
+cceptreq.php
+cceptreq.php
+cceptreq.php
 	$r = db_query($query1);
+cceptreq.php
+cceptreq.php
+cceptreq.php
 	$n = mysql_fetch_array($r);
+cceptreq.php
+cceptreq.php
+cceptreq.php
 	$name = $n['name'];
+cceptreq.php
+cceptreq.php
+cceptreq.php
 ?>
+cceptreq.php
+cceptreq.php
+cceptreq.php
 <h5>Would you like add <?= $name ?> to your graph?</h5>
+cceptreq.php
+cceptreq.php
+cceptreq.php
 <img src="http://graph.facebook.com/<?=$user?>/picture/?type=large" alt=" " width="64" height="64" align="left"/>
+cceptreq.php
+cceptreq.php
+cceptreq.php
 
+cceptreq.php
+cceptreq.php
+cceptreq.php
 &nbsp;
+cceptreq.php
+cceptreq.php
+cceptreq.php
 <br>
+cceptreq.php
+cceptreq.php
+cceptreq.php
 <!-- Accept the request,call acceptreq.php-->
-<a id = "accept<?=$user?>" class ='boldbuttons' href='#' onclick="jQuery.post('acceptreq.php',{ uid1:<?=$self?>,uid2:<?=$user?>});jQuery('#freq_d<?=$user?>').dialog('close');"><span>Accept</span></a>       
+cceptreq.php
+cceptreq.php
+cceptreq.php
+<a id = "accept<?=$user?>" class ='boldbuttons' href='#' onclick="jQuery.post('acceptreq.php',{ uid1:<?=$self?>,uid2:<?=$user?>,accepted:true});jQuery('#freq_d<?=$user?>').dialog('close');"><span>Accept</span></a>       
+cceptreq.php
+cceptreq.php
+cceptreq.php
                        
-<a class ='boldbuttons' href='#' onclick="$('#freq_d<?=$user?>').dialog('close');"><span>Reject</span></a>	
+cceptreq.php
+cceptreq.php
+cceptreq.php
+<a class ='boldbuttons' href='#' onclick="jQuery.post('acceptreq.php',{ uid1:<?=$self?>,uid2:<?=$user?>,accepted:false});$('#freq_d<?=$user?>').dialog('close');"><span>Reject</span></a>	
+cceptreq.php
+cceptreq.php
+cceptreq.php
 
+cceptreq.php
+cceptreq.php
+cceptreq.php
 </html>
+cceptreq.php
+cceptreq.php
+cceptreq.php
