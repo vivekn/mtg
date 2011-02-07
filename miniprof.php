@@ -21,6 +21,13 @@
 	<p>
    <?php print_status($t); ?>
     </p>
+    <?php 
+    	include_once "kygame.php";
+		if ($GAME_ENABLED) {
+				$sc = get_score();
+				echo "<a style='float: left;'>Game Score: $sc </a>";
+			}
+    ?>
     <a href="inv3.php" target="_top" style="float: right;">Invite Friends</a>
     </div>
 <HR>

@@ -133,7 +133,11 @@ function initialize() {
     var myOptions = {
       zoom: zoom,
       center: latLng,
-      mapTypeId: google.maps.MapTypeId.ROADMAP
+      mapTypeId: google.maps.MapTypeId.ROADMAP,
+      zoomControl: true,
+    zoomControlOptions: {
+      style: google.maps.ZoomControlStyle.LARGE
+    }
     };
      map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
 
@@ -150,41 +154,26 @@ function initialize() {
 			 var span = document.createElement("a");
 			 span.setAttribute('id','status_upd');
 			 span.onclick =   function () {
-			 		var foo = new Date; // Generic JS date object
-					var unixtime_ms = foo.getTime(); // Returns milliseconds since the epoch
-					var unixtime = parseInt(unixtime_ms / 1000);
 				 addMarker2(event.latLng);
 				 var msg = $("#st_text").val();
 				 var tag = $("input[name='group']:checked").val();
+				 var loc = getAddress(event.latLng);
 				 $.post('./setstatus.php',{ //check jQuery docs for this
 										   uid:<?=$uid?>,
 										   msg:msg,
 										   lat:event.latLng.lat(),
 										   lng:event.latLng.lng(),
-										   tag:tag
-											}, function (data) {
-													var loc = getAddress(event.latLng);
-													feedHandler(msg,loc); });
+										   tag:tag,
+										   loc:loc 
+											});
 													info.close();
-													location.reload();
+												$('#apDiv1').load('miniprof.php',"uid=<?=$uid?>");
 				 }
 			 span.setAttribute('class','boldbuttons');
 			 span.setAttribute('href','#');
 			 span.innerHTML = '<span>Set Status</span>';
 			 btn.appendChild(span);
-			 html.innerHTML = '<textarea name="st_text" id="st_text"  ></textarea><br>\
-Pick a Tag: \
-<input type="radio" name="group" value="" checked></input> \ 
-<img class="tag_img" src="../globe.jpg" width="32" height="32" title="Nothing in particular"></img> \
-<input type="radio" name="group" value="home"></input> \
-<img class="tag_img" src="../home48.png" width="32" height="32" title="home"></img> \
-<input type="radio" name="group" value="restaurant"></input> \
-<img class="tag_img" src="../dine.jpg" width="32" height="32" title="restaurant"></img> \
-<input type="radio" name="group" value="workplace"></input> \
-<img class="tag_img" src="../workplace.gif" width="32" height="32" title="workplace"></img>\
-<input type="radio" name="group" value="school"></input>\
-<img class="tag_img" src="../school-icon.png" width="32" height="32" title = "college/school"></img>\
-<br>';
+			 html.innerHTML = '<textarea name="st_text" id="st_text"  ></textarea><br>Pick a Tag: <input type="radio" name="group" value="" checked></input><img class="tag_img" src="globe.png" width="32" height="32" title="Nothing in particular"></img> <input type="radio" name="group" value="home"></input> <img class="tag_img" src="home48.png" width="32" height="32" title="home"></img> <input type="radio" name="group" value="restaurant"></input> <img class="tag_img" src="dine.jpg" width="32" height="32" title="restaurant"></img> <input type="radio" name="group" value="workplace"></input> <img class="tag_img" src="workplace.gif" width="32" height="32" title="workplace"></img><input type="radio" name="group" value="college/school"></input><img class="tag_img" src="school-icon.png" width="32" height="32" title = "college/school"></img><br>';
 			 //TODO: Add drop down box with images and text
 			 //TODO: update status update php script accordingly
 			 html.appendChild(btn);

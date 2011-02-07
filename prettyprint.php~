@@ -24,10 +24,10 @@ function print_update($t) {
 function print_status($t){
 
 
-$html ="<a class='status' href='#' onclick = 'addToMap(\"$t[uid]\",\"$t[name]\",\"$t[status]\",\"$t[timestamp]\",$t[lat],$t[lng]);'> $t[status] </a><abbr class='timeago' title='$t[timestamp]'>$t[timestamp]</abbr><br> <img src = 'globe.jpg' title = 'Map this' width = '12' height = '12' align = 'right'/>";
+$html ="<a class='status' href='#' onclick = 'addToMap(\"$t[uid]\",\"$t[name]\",\"$t[status]\",\"$t[timestamp]\",$t[lat],$t[lng]);'> $t[status] </a><abbr class='timeago' title='$t[timestamp]'>$t[timestamp]</abbr> <img src = 'globe.png' title = 'Map this' width = '12' height = '12' href ='#' onclick = 'addToMap(\"$t[uid]\",\"$t[name]\",\"$t[status]\",\"$t[timestamp]\",$t[lat],$t[lng]);'/><br>";
 
-if(isset($t['tag']&&$t['tag']) {
-			$html ="<a class='status' href='#' onclick = 'addToMap(\"$t[uid]\",\"$t[name]\",\"$t[status]\",\"$t[timestamp]\",$t[lat],$t[lng]);'> $t[status] </a><abbr class='timeago' title='$t[timestamp]'>$t[timestamp]</abbr><br> <<img src = '$t[img]' title = '$t[tag]' width = '12' height = '12'/><img src = 'globe.jpg' title = 'Map this' width = '12' height = '12' align = 'right'/>";
+if(isset($t['tag'])&&$t['tag']) {
+			$html ="<a class='status' href='#' onclick = 'addToMap(\"$t[uid]\",\"$t[name]\",\"$t[status]\",\"$t[timestamp]\",$t[lat],$t[lng]);'> $t[status] </a><abbr class='timeago' title='$t[timestamp]'>$t[timestamp]</abbr><br> <<img src = '$t[img]' title = '$t[tag]' width = '12' height = '12'/><img src = 'globe.png' title = 'Map this' width = '12' height = '12' href ='#' onclick = 'addToMap(\"$t[uid]\",\"$t[name]\",\"$t[status]\",\"$t[timestamp]\",$t[lat],$t[lng]);' /><br>";
 	
 	}
 

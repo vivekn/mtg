@@ -5,27 +5,34 @@
 */
 include "boilerplate.php";
 include_once "fbmain.php";
+include_once "kygame.php";
 $tag = '';
 $me = $_REQUEST['uid'];
 $msg = $_REQUEST['msg'];
 $lat = $_REQUEST['lat'];
 $lng = $_REQUEST['lng'];
 $tag = $_REQUEST['tag'];
+$loc =null;
 
+if (isset($_REQUEST['loc']))
+	$loc = $_REQUEST['loc'];
 $wall = $msg;
+
+if($loc && strcmp($loc, "undefined"))
+	$wall = $wall." at ".$loc;
 
 $mysqldate = date('Y-m-d H:i:s');//Gets the current server time and converts it to MySQL format.
 $tag_data = array();
 
 if($tag) {
-	$checktag = "SELECT * FROM tags WHERE tag=\"$tag\"";
+	$checktag = "SELECT * FROM tags WHERE name=\"$tag\"";
 	$ct = db_query($checktag);
 	if($ct) {
 			$tag_data = mysql_fetch_array($ct);
 		}
 }
 
-$query1 = "INSERT INTO updates VALUES (\"$me\",$lat,$lng,\"$msg\",\"$mysqldate\",$tag)";
+$query1 = "INSERT INTO updates VALUES (\"$me\",$lat,$lng,\"$msg\",\"$mysqldate\",\"$tag\")";
 $query2 = "UPDATE users1 SET lat=$lat , lng=$lng , status = \"$msg\" , time = \"$mysqldate\" WHERE uid = \"$me\"";
 $r = db_query($query1);
 $r1 = db_query($query2);
@@ -39,8 +46,9 @@ if($r and $r1) {
 	$result = $facebook->api(
             '/me/feed/',
             'post',
-            array('message' => "$wall .                       powered by mapTheGraph - try it here                   http://apps.facebook.com/maptg_one")
+            array('message' => "$wall .                       powered by mapTheGraph - try it here                   $fbconfig[appBaseUrl]")
         );
+    	game_status_update();
 }
 	else {
 			$result = $facebook->api(
@@ -48,11 +56,11 @@ if($r and $r1) {
             'post',
             array('message' => "$fbme[first_name] $tag_data[message]",
             		'link' => "http://apps.facebook.com/maptg_one",
-            		'caption' => 'Click here to visit mapTheGraph now!',
-            		'image' => $fbconfig['baseUrl'].$tag_data['image']
+            		'name' => 'Click here to visit mapTheGraph now! .Find where your friends are right now!',
+            		'picture' => $fbconfig['baseUrl'].$tag_data['image']
             		)
         );
-		
+		game_new_tag();
 		}
 
 }

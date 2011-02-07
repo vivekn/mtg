@@ -85,7 +85,7 @@ margin-bottom: 2px;
        }  
    $excl = implode(',', $friends);  
 ?>
-   	
+<p>Invite your friends to mapTheGraph!. Inviting your friends to use mapTheGraph will dramatically improve your experience and chances of finding the coolest places in town.</p>   	
 <div id="fb-root"></div>
 <fb:serverfbml>
   <script type="text/fbml" >
