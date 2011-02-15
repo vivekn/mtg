@@ -1,5 +1,6 @@
 <?php
 include_once "boilerplate.php";
+include_once "kygame.php";
 /* DB code for accepting friend requests and invitations */
 
 function accept_friend($me,$sent_from,$invite_mode,$accepted) {

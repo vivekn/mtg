@@ -7,7 +7,7 @@
 
     //set application urls here
     $fbconfig['baseUrl']    =   "http://aagmh3tm.facebook.joyent.us/mapit/mapthegraph/"; //http://thinkdiff.net/demo/newfbconnect1/iframe;
-    $fbconfig['appBaseUrl'] =   "http://apps.facebook.com/maptg_one"; //;
+    $fbconfig['appBaseUrl'] =   "http://apps.facebook.com/mapthegraph"; //;
 
     $uid            =   null; //facebook user id
 

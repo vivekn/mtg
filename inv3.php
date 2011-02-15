@@ -26,21 +26,6 @@ margin-bottom: 2px;
 </head>
 <body>
 <h4>Invite your friends to mapTheGraph</h4>
-<script type="text/javascript" src="js/jquery-1.4.2.min.js"></script>
-<script type="text/javascript" >
-//Event handlers for Add and Invite buttons generated below
-	$(document).ready(function () {	
-	$('.newfield').click( function () {
-		$(this).hide('slow');		
-		var friendId = $(this).attr('name');		
-		$.post('createreq.php',{
-										uid:<?php echo $uid;?>,
-										sent_to:friendId
-											});
-		});
-		}
-		);
-</script>
     <?php  
 
 	include_once "boilerplate.php";
@@ -85,15 +70,15 @@ margin-bottom: 2px;
        }  
    $excl = implode(',', $friends);  
 ?>
-<p>Invite your friends to mapTheGraph!. Inviting your friends to use mapTheGraph will dramatically improve your experience and chances of finding the coolest places in town.</p>   	
+<p>Invite your friends to mapTheGraph!. Inviting your friends to use mapTheGraph will dramatically improve your experience and chances of finding the coolest places in town. Plus you will earn mapTheGraph points for every invite you send, this can later be redeemed for special gifts and prizes!</p>   	
 <div id="fb-root"></div>
 <fb:serverfbml>
   <script type="text/fbml" >
 
 
      <fb:request-form action="<?=$fbconfig['baseUrl']?>proc_inv.php" method="POST" invite="true" type="mapTheGraph!" 
-       content="Hi, I am using mapTheGraph, an app that lets you follow the cool places I've been to and where I am on a map.I would like to add you to my graph!.">
-     <fb:multi-friend-selector actiontext="Invite your friends to use this app."  exclude_ids = "<?=$excl?>"/> 
+       content="Hi, I am using mapTheGraph, an app that lets you find and share cool and exciting places. I would like to add you to my graph!.">
+     <fb:multi-friend-selector actiontext="Invite your friends to use this app."  exclude_ids = "<?=$excl?>" email_invite="false" import_external_friends="false"/> 
   
   </fb:request-form>
 </script>

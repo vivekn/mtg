@@ -27,7 +27,7 @@ function print_status($t){
 $html ="<a class='status' href='#' onclick = 'addToMap(\"$t[uid]\",\"$t[name]\",\"$t[status]\",\"$t[timestamp]\",$t[lat],$t[lng]);'> $t[status] </a><abbr class='timeago' title='$t[timestamp]'>$t[timestamp]</abbr> <a href='#'><img src = 'globe.png' title = 'Map this' width = '12' height = '12'  onclick = 'addToMap(\"$t[uid]\",\"$t[name]\",\"$t[status]\",\"$t[timestamp]\",$t[lat],$t[lng]);'/></a><br>";
 
 if(isset($t['tag'])&&$t['tag']) {
-			$html ="<a class='status' href='#' onclick = 'addToMap(\"$t[uid]\",\"$t[name]\",\"$t[status]\",\"$t[timestamp]\",$t[lat],$t[lng]);'> $t[status] </a><abbr class='timeago' title='$t[timestamp]'>$t[timestamp]</abbr><br> <<img src = '$t[img]' title = '$t[tag]' width = '12' height = '12'/><a href ='#'><img src = 'globe.png' title = 'Map this' width = '12' height = '12'  onclick = 'addToMap(\"$t[uid]\",\"$t[name]\",\"$t[status]\",\"$t[timestamp]\",$t[lat],$t[lng]);' /></a><br>";
+			$html ="<a class='status' href='#' onclick = 'addToMap(\"$t[uid]\",\"$t[name]\",\"$t[status]\",\"$t[timestamp]\",$t[lat],$t[lng]);'> $t[status] </a><abbr class='timeago' title='$t[timestamp]'>$t[timestamp]</abbr><br> <img src = '$t[img]' title = '$t[tag]' width = '12' height = '12'/> <a href ='#'><img src = 'globe.png' title = 'Map this' width = '12' height = '12'  onclick = 'addToMap(\"$t[uid]\",\"$t[name]\",\"$t[status]\",\"$t[timestamp]\",$t[lat],$t[lng]);' /></a><br>";
 	
 	}
 

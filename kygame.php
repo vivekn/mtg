@@ -1,10 +1,10 @@
 <?php
 include_once "boilerplate.php";
 
-$GAME_ENABLED = false;
+$GAME_ENABLED = true;
 
 
-function check_user() {
+function check_user($uid) {
 	//checks if user exists
 	$r = db_query("SELECT * FROM game WHERE uid=\"$uid\"");
 	$t = mysql_fetch_array($r);
@@ -12,14 +12,14 @@ function check_user() {
 	if($t)
 		return;
 	else
-		$r = db_query("INSERT INTO game VALUES (\"$uid\",0");	
+		$r = db_query("INSERT INTO game VALUES (\"$uid\",0)");	
 	
 	}
 
 
-function update_score($user,$score_offset) {
-	if ($GAME_ENABLED) {
-		check_user();
+function update_score($uid,$score_offset) {
+	if ($GLOBALS['GAME_ENABLED']) {
+		check_user($uid);
 		$r = db_query("SELECT * FROM game WHERE uid=\"$uid\"");
 		$t = mysql_fetch_array($r);
 	
@@ -34,18 +34,18 @@ function game_invite_user($user) {
 	}
 
 function game_invite_accepted($user) {
-	update_score($user,13);	
+	update_score($user,10);	
 	}
 
 function game_status_update($user) {
-	update_score($user,12);	
+	update_score($user,18);	
 	}
 
 function game_new_tag($user) {
 	update_score($user,24);	
 	}
 
-function get_score() {
+function get_score($uid) {
 	$r = db_query("SELECT * FROM game WHERE uid=\"$uid\"");
 	$t = mysql_fetch_array($r);
 	$score = 0;	

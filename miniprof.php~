@@ -24,12 +24,13 @@
     <?php 
     	include_once "kygame.php";
 		if ($GAME_ENABLED) {
-				$sc = get_score();
-				echo "<a style='float: left;'>Game Score: $sc </a>";
+				$sc = get_score($me);
+				echo "<a style='float: left;'>Your Score: $sc </a><br><a style ='float: left;' href='#' onclick =\"$('#help').dialog({autoOpen:false,modal:true,height:300,width:400}).load('help.htm').dialog('open');\" >More info!</a>";
 			}
     ?>
     <a href="inv3.php" target="_top" style="float: right;">Invite Friends</a>
     </div>
+    <div id = "help" title = "KY mapTheGraph! Contest"/>
 <HR>
 <script type="text/javascript" >
 $(document).ready(function () {

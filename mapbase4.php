@@ -6,20 +6,13 @@
 <link rel="stylesheet" type="text/css" href="css/ui-lightness/jquery-ui-1.8.6.custom.css" media="screen"/>
 
 <title>mapTheGraph!</title>
-<script type="text/javascript" src="js/jquery-1.4.2.min.js"></script>
-<script type="text/javascript" src="ui/jquery.ui.core.js"></script>
-<script type="text/javascript" src="ui/jquery.ui.widget.js"></script>
-<script type="text/javascript" src="ui/jquery.ui.dialog.js"></script>
-<script src="ui/jquery.ui.mouse.js"></script>
-<script src="ui/jquery.ui.draggable.js"></script>
-<script src="ui/jquery.ui.position.js"></script>
-<script src="ui/jquery.ui.resizable.js"></script>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
 
 <LINK REL=StyleSheet HREF="design.css" TYPE="text/css" MEDIA="screen">
 
 </script>
 <script type="text/javascript"
-    src="js/jquery-ui-1.8.6.custom.min.js">
+    src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.9/jquery-ui.min.js">
 </script>
 <script type="text/javascript" src = "jquery.timeago.js"></script>
 <!-- jQuery Code starts here-->

@@ -14,7 +14,7 @@ $check = mysql_fetch_array($temp1);
 
 if (!$check) {
 	$query1 = "INSERT INTO invites VALUES (\"$sent_to\",\"$me\")";
-	game_invite_user();	
+	game_invite_user($me);	
 	}
 else	
 	$query1 = "INSERT INTO requests VALUES (\"$sent_to\",\"$me\")";

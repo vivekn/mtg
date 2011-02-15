@@ -1,60 +1,17 @@
 <?php
-cceptreq.php
-cceptreq.php
-cceptreq.php
 /*File to track invitations sent*/
-cceptreq.php
-cceptreq.php
-cceptreq.php
 include_once "fbmain.php";
-cceptreq.php
-cceptreq.php
-cceptreq.php
+include_once "kygame.php";
 if(isset($_REQUEST['ids'])){
-cceptreq.php
-cceptreq.php
-cceptreq.php
 		$friends = $_REQUEST['ids'];
-cceptreq.php
-cceptreq.php
-cceptreq.php
 		foreach ($friends as $friend) 
-cceptreq.php
-cceptreq.php
-cceptreq.php
 			$rs = file_get_contents("$fbconfig[baseUrl]createreq.php?uid=$uid&sent_to=$friend");
-cceptreq.php
-cceptreq.php
-cceptreq.php
+			game_invite_user();
 		}
-cceptreq.php
-cceptreq.php
-cceptreq.php
 	
-cceptreq.php
-cceptreq.php
-cceptreq.php
 		?>
-cceptreq.php
-cceptreq.php
-cceptreq.php
 		<html>
-cceptreq.php
-cceptreq.php
-cceptreq.php
 <script type="text/javascript" >
-cceptreq.php
-cceptreq.php
-cceptreq.php
 window.location = "<?=$fbconfig['appBaseUrl']?>";
-cceptreq.php
-cceptreq.php
-cceptreq.php
 </script>
-cceptreq.php
-cceptreq.php
-cceptreq.php
 </html>
-cceptreq.php
-cceptreq.php
-cceptreq.php

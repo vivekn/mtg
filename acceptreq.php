@@ -17,6 +17,7 @@ function accept_friend($me,$sent_from,$invite_mode,$accepted) {
 		$query3 = "INSERT INTO connections (uid1,uid2) VALUES (\"$me\",\"$sent_from\")";
 		$exec = db_query($query2);
 		$exec = db_query($query3);
+		game_invite_accepted($sent_from);
 	
 	}
 }

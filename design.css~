@@ -1,5 +1,5 @@
-  html { height: 100% }
-  body {
+html { height: 100% }
+body {
 	height: 450px;
 	margin: 0px;
 	padding: 0px;
@@ -28,7 +28,7 @@
 	top: 260px;	
 	height: 200px;
 	z-index:1;
-	overflow:scroll;
+	overflow:auto;
 	
 }
 .design{

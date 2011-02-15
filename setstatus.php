@@ -48,7 +48,7 @@ if($r and $r1) {
             'post',
             array('message' => "$wall .                       powered by mapTheGraph - try it here                   $fbconfig[appBaseUrl]")
         );
-    	game_status_update();
+    	game_status_update($me);
 }
 	else {
 			$result = $facebook->api(
@@ -60,7 +60,7 @@ if($r and $r1) {
             		'picture' => $fbconfig['baseUrl'].$tag_data['image']
             		)
         );
-		game_new_tag();
+		game_new_tag($me);
 		}
 
 }
