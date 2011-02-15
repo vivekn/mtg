@@ -12,7 +12,7 @@ body {
 background-image: url('mapthegraph.jpg');
 font:"Lucida Sans Unicode", "Lucida Grande", sans-serif;
 font-size: 20pt;
-color: white;
+color: red;
 font-weight: bold;
 }
 

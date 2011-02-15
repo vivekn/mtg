@@ -12,6 +12,6 @@ if(isset($_REQUEST['ids'])){
 		?>
 		<html>
 <script type="text/javascript" >
-window.location = "<?=$fbconfig['appBaseUrl']?>";
+window.location = "./index.php";
 </script>
 </html>

@@ -9,7 +9,7 @@ function db_query($query) {
 		return $r;		
 	else {
 		
-		die("Sorry , a database error occured:".mysql_error()); // remove this after testing phase is over
+		die("Sorry , a database error occured:".mysql_error()."\n $query"); // remove this after testing phase is over
 	}
 }
 

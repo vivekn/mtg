@@ -7,15 +7,7 @@
 
 <title>mapTheGraph!</title>
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
-<!--
-<script type="text/javascript" src="ui/jquery.ui.core.js"></script>
-<script type="text/javascript" src="ui/jquery.ui.widget.js"></script>
-<script type="text/javascript" src="ui/jquery.ui.dialog.js"></script>
-<script src="ui/jquery.ui.mouse.js"></script>
-<script src="ui/jquery.ui.draggable.js"></script>
-<script src="ui/jquery.ui.position.js"></script>
-<script src="ui/jquery.ui.resizable.js"></script>
--->
+
 <LINK REL=StyleSheet HREF="design.css" TYPE="text/css" MEDIA="screen">
 
 </script>
@@ -303,6 +295,8 @@ function getAddress(latLng) {
 		e.async = true;
 		document.getElementById('fb-root').appendChild(e);
 	}());
+	
+	FB.Canvas.setAutoResize(true);
 	
 	/*Function to publish status updates to the user's wall*/
 	function feedHandler(message,loc) {

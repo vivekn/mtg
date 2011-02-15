@@ -288,6 +288,7 @@ function getAddress(latLng) {
 		window.location.reload();
 	});
 	};
+	FB.Canvas.setAutoResize(true);
 	
 	(function() {
 		var e = document.createElement('script');
@@ -295,6 +296,8 @@ function getAddress(latLng) {
 		e.async = true;
 		document.getElementById('fb-root').appendChild(e);
 	}());
+	
+	
 	
 	/*Function to publish status updates to the user's wall*/
 	function feedHandler(message,loc) {

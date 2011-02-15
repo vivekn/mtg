@@ -31,6 +31,7 @@ if(isset($t['tag'])&&$t['tag']) {
 	
 	}
 
+if($t['timestamp'])
 echo $html;
 
 }
