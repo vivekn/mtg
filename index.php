@@ -56,10 +56,10 @@
 				$posn = mysql_fetch_array($r2);
 			}
 			
-			if($is_first_time)
+			/*if($is_first_time)
 				include_once "firsttime.php";
-			else 
-				include_once "mapbase4.php";
+			else*/ 
+			include_once "mapbase4.php";
 		
 	}
 	 else 

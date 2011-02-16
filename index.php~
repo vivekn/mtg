@@ -1,276 +1,69 @@
 <?php
-cceptreq.php
-cceptreq.php
-cceptreq.php
     include_once "fbmain.php";
-cceptreq.php
-cceptreq.php
-cceptreq.php
     include_once "acceptreq.php";
-cceptreq.php
-cceptreq.php
-cceptreq.php
 
-cceptreq.php
-cceptreq.php
-cceptreq.php
     /*Controller file for preparing the app,when the user logs in*/
-cceptreq.php
-cceptreq.php
-cceptreq.php
     /*TODO: Add random invite code*/
-cceptreq.php
-cceptreq.php
-cceptreq.php
    
-cceptreq.php
-cceptreq.php
-cceptreq.php
 
-cceptreq.php
-cceptreq.php
-cceptreq.php
     
-cceptreq.php
-cceptreq.php
-cceptreq.php
     if($fbme) {
-cceptreq.php
-cceptreq.php
-cceptreq.php
     	$is_first_time = true;
-cceptreq.php
-cceptreq.php
-cceptreq.php
 		$user_query = "SELECT * FROM users1 WHERE uid = \"$uid\"";
-cceptreq.php
-cceptreq.php
-cceptreq.php
 		$temp1 = db_query($user_query);
-cceptreq.php
-cceptreq.php
-cceptreq.php
 		$check = mysql_fetch_array($temp1);
-cceptreq.php
-cceptreq.php
-cceptreq.php
 		if (!$check){
-cceptreq.php
-cceptreq.php
-cceptreq.php
 			
-cceptreq.php
-cceptreq.php
-cceptreq.php
 			$name = $fbme['name'];
-cceptreq.php
-cceptreq.php
-cceptreq.php
 			$query = "INSERT INTO users1 (uid,name) VALUES (\"$uid\",\"$name\")";
-cceptreq.php
-cceptreq.php
-cceptreq.php
 			
-cceptreq.php
-cceptreq.php
-cceptreq.php
 			$r = db_query($query);
-cceptreq.php
-cceptreq.php
-cceptreq.php
 			/*Code for accepting invites*/ 
-cceptreq.php
-cceptreq.php
-cceptreq.php
 			$query = "SELECT * FROM invites WHERE invited = \"$uid\"";
-cceptreq.php
-cceptreq.php
-cceptreq.php
 			$r = db_query($query);
-cceptreq.php
-cceptreq.php
-cceptreq.php
 			while($friend = mysql_fetch_array($r))
-cceptreq.php
-cceptreq.php
-cceptreq.php
 				accept_friend($uid,$friend['invited_by'],true,true);
-cceptreq.php
-cceptreq.php
-cceptreq.php
 			
-cceptreq.php
-cceptreq.php
-cceptreq.php
 			}
-cceptreq.php
-cceptreq.php
-cceptreq.php
 		else {
-cceptreq.php
-cceptreq.php
-cceptreq.php
 			/* Code for friend requests */
-cceptreq.php
-cceptreq.php
-cceptreq.php
 			
-cceptreq.php
-cceptreq.php
-cceptreq.php
 			/* Code for auto adding friends */
-cceptreq.php
-cceptreq.php
-cceptreq.php
 			$fql_a = 'SELECT uid,name FROM user WHERE uid IN (SELECT uid2 FROM friend WHERE uid1='.$uid.') AND has_added_app = 1';
-cceptreq.php
-cceptreq.php
-cceptreq.php
        $app_friends = $facebook->api(array(  
-cceptreq.php
-cceptreq.php
-cceptreq.php
  						'method' => 'fql.query',  
-cceptreq.php
-cceptreq.php
-cceptreq.php
  						'query' =>$fql_a, 
-cceptreq.php
-cceptreq.php
-cceptreq.php
  						'callback' => ''
-cceptreq.php
-cceptreq.php
-cceptreq.php
 							)); 
-cceptreq.php
-cceptreq.php
-cceptreq.php
 	   foreach ($app_friends as $friend) {
-cceptreq.php
-cceptreq.php
-cceptreq.php
 	       $q = db_query("SELECT * FROM connections WHERE uid1 = $uid AND uid2 = $friend[uid]");
-cceptreq.php
-cceptreq.php
-cceptreq.php
         	  if ((!mysql_num_rows($q))) {
-cceptreq.php
-cceptreq.php
-cceptreq.php
                $q = db_query("INSERT INTO requests VALUES (\"$friend[uid]\",\"$uid\")");
-cceptreq.php
-cceptreq.php
-cceptreq.php
                accept_friend($friend['uid'],$uid,false,true);       	      
-cceptreq.php
-cceptreq.php
-cceptreq.php
         	      }
-cceptreq.php
-cceptreq.php
-cceptreq.php
     	}
-cceptreq.php
-cceptreq.php
-cceptreq.php
 			
-cceptreq.php
-cceptreq.php
-cceptreq.php
 			/* Code for registering user*/
-cceptreq.php
-cceptreq.php
-cceptreq.php
 			$is_first_time	= false;		
-cceptreq.php
-cceptreq.php
-cceptreq.php
 			$query = "SELECT * FROM requests WHERE sent_to = \"$uid\"";
-cceptreq.php
-cceptreq.php
-cceptreq.php
 			$r = db_query($query);
-cceptreq.php
-cceptreq.php
-cceptreq.php
 			$friend_req_array = array();
-cceptreq.php
-cceptreq.php
-cceptreq.php
 			while($friend = mysql_fetch_array($r))
-cceptreq.php
-cceptreq.php
-cceptreq.php
 				$friend_req_array[] = $friend['sent_from'];
-cceptreq.php
-cceptreq.php
-cceptreq.php
 
-cceptreq.php
-cceptreq.php
-cceptreq.php
 			/* Code for finding last set position of the user */			
-cceptreq.php
-cceptreq.php
-cceptreq.php
 				$r2 = db_query("SELECT * FROM users1 WHERE uid = \"$uid\"");
-cceptreq.php
-cceptreq.php
-cceptreq.php
 				$posn = mysql_fetch_array($r2);
-cceptreq.php
-cceptreq.php
-cceptreq.php
 			}
-cceptreq.php
-cceptreq.php
-cceptreq.php
 			
-cceptreq.php
-cceptreq.php
-cceptreq.php
 			if($is_first_time)
-cceptreq.php
-cceptreq.php
-cceptreq.php
 				include_once "firsttime.php";
-cceptreq.php
-cceptreq.php
-cceptreq.php
 			else 
-cceptreq.php
-cceptreq.php
-cceptreq.php
 				include_once "mapbase4.php";
-cceptreq.php
-cceptreq.php
-cceptreq.php
 		
-cceptreq.php
-cceptreq.php
-cceptreq.php
 	}
-cceptreq.php
-cceptreq.php
-cceptreq.php
 	 else 
-cceptreq.php
-cceptreq.php
-cceptreq.php
 		echo "Sorry , a database error occured";
-cceptreq.php
-cceptreq.php
-cceptreq.php
 			
-cceptreq.php
-cceptreq.php
-cceptreq.php
     
-cceptreq.php
-cceptreq.php
-cceptreq.php
 ?>
-cceptreq.php
-cceptreq.php
-cceptreq.php

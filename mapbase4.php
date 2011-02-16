@@ -106,10 +106,29 @@ function initialize() {
   		var latLng = new google.maps.LatLng(google.loader.ClientLocation.latitude,                 google.loader.ClientLocation.longitude);
 		var zoom = 10;  		
   		}
+  		
    else        {
       var latLng = new google.maps.LatLng(0, 0);
   		var zoom = 1;
   		
+  		if (!geocoder) 
+    		geocoder = new google.maps.Geocoder();
+  
+  		// Creating a GeocoderRequest object
+  		var geocoderRequest = {
+    		address: '<?php echo $fbme['location']['name']?>'
+  		};
+  
+  geocoder.geocode(geocoderRequest, function(results, status) {
+  	// Check to see if the request went allright
+	if (status == google.maps.GeocoderStatus.OK) {
+		 if (results[0].geometry) {
+		 		latLng = new google.maps.LatLng(results[0].geometry,location);
+				zoom = 10;		 	
+		 	}
+		}});
+		
+  		if (zoom==1) {
   		//Find the user's previous location if unable to locate current location
   		<?php
   		if(isset($posn))
@@ -121,8 +140,8 @@ function initialize() {
   					}
   			}
   		?>
+		}
 }
-
     var myOptions = {
       zoom: zoom,
       center: latLng,
@@ -287,8 +306,9 @@ function getAddress(latLng) {
 	FB.Event.subscribe('auth.login', function() {
 		window.location.reload();
 	});
-	};
 	FB.Canvas.setAutoResize(true);
+	};
+	
 	
 	(function() {
 		var e = document.createElement('script');
