@@ -114,7 +114,7 @@ function initialize() {
   		if (!geocoder) 
     		geocoder = new google.maps.Geocoder();
   
-  		// Creating a GeocoderRequest object
+  		// Get location from facebook
   		var geocoderRequest = {
     		address: '<?php echo $fbme['location']['name']?>'
   		};
@@ -122,8 +122,9 @@ function initialize() {
   geocoder.geocode(geocoderRequest, function(results, status) {
   	// Check to see if the request went allright
 	if (status == google.maps.GeocoderStatus.OK) {
+		
 		 if (results[0].geometry) {
-		 		latLng = new google.maps.LatLng(results[0].geometry,location);
+		 		latLng = new google.maps.LatLng(results[0].geometry.location);
 				zoom = 10;		 	
 		 	}
 		}});

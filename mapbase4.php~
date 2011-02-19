@@ -306,8 +306,9 @@ function getAddress(latLng) {
 	FB.Event.subscribe('auth.login', function() {
 		window.location.reload();
 	});
-	};
 	FB.Canvas.setAutoResize(true);
+	};
+	
 	
 	(function() {
 		var e = document.createElement('script');

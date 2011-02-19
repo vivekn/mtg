@@ -34,7 +34,7 @@
     	if(!$t['timestamp'])
 		echo "<script type=\"text/javascript\"> $('#help0').dialog({autoOpen: false, height: 220, width: 400, modal: true}).dialog('open') </script>"
     ?>
-    <div id = "help" title = "KY mapTheGraph! Contest" style="display: none;"/>
+    <div id = "help" title = "mapTheGraph! Points" style="display: none;"/>
 	 <div id = "help0" title = "Getting Started" style="display: none;">
 		<p>
 			Thanks for installing mapTheGraph. mapTheGraph! lets you share places you've been to with your friends. To get started with, try tagging your home, college or workplace or just any cool new place that you went to last weekend.</p> 
