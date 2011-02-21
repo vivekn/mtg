@@ -166,7 +166,6 @@
 				$("abbr.timeago").timeago();
 		}
 	
-	
 		function addInfo(latlng,html) {
 			if(!info) 
 				info = new google.maps.InfoWindow();			
