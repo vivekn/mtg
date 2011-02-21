@@ -62,6 +62,7 @@
 					markersArray[i].setMap(null);
 				markersArray.length = 0;
 			}
+		}
 	
 		function initialize() {
 			// Getting the position of the user thru auto-geolocation

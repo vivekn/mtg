@@ -196,15 +196,12 @@
 	</script>
 </head>
 <body onLoad="initialize()">
-<a id="msgdown" ></a>
-<div id="apDiv1" class="design">
-</div>
-<div id="apDiv2" class="design2">
-Double click on the map to update your location
-</div>
-<div id = "frnd_upd" class="design"></div>
-<div id ="freq_d" title="Accept Request"></div>
-<div id="map_canvas"></div>
-<div id ="fsug_d" title="Add friends" style="display:none"><img src="ajax-loader.gif" alt="Loading ..."  /></div>
+	<a id="msgdown" ></a>
+	<div id="apDiv1" class="design"></div>
+	<div id="apDiv2" class="design2">Double click on the map to update your location</div>
+	<div id = "frnd_upd" class="design"></div>
+	<div id ="freq_d" title="Accept Request"></div>
+	<div id="map_canvas"></div>
+	<div id ="fsug_d" title="Add friends" style="display:none"><img src="ajax-loader.gif" alt="Loading ..."  /></div>
 </body>
 </html>
