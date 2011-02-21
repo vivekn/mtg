@@ -50,7 +50,7 @@
 		function addMarker(location) {
 			marker = new google.maps.Marker({
 				position: location,
-				map: map
+				map: map,
 			});
 			markersArray.push(marker);
 		}
@@ -92,7 +92,7 @@
 		
 			// Get location from facebook
 			var geocoderRequest = {
-				address: '<?php if (isset($fbme['location'])) {echo $fbme['location']['name'];}?>'
+				address: '<?php if (isset($fbme['location'])) {echo $fbme['location']['name'];}?>',
 			};
 		  
 			geocoder.geocode(geocoderRequest, function(results, status) {
@@ -124,7 +124,7 @@
 						lat:event.latLng.lat(),
 						lng:event.latLng.lng(),
 						tag:tag,
-						loc:loc 
+						loc:loc, 
 					});
 					info.close();
 					now = new Date;
@@ -141,59 +141,59 @@
 			});					
 		}
 	
-	function addMarker2(latlng) {
-		
-		var marker = new google.maps.Marker({
-										position:latlng,
-											});
-		marker.setMap(map);
-	}
-	
-	function addMarkerInfo(latlng,html) {
+		function addMarker2(latlng) {
 			
-			markers.push(new google.maps.Marker({
+			var marker = new google.maps.Marker({
 											position:latlng,
-											}));
-			ind = markers.length - 1;
-			contents = "<div onload=\"$('abbr.timeago').timeago()\">"+html+"</div>";
-			if(!info)
-				info = new google.maps.InfoWindow();
-			google.maps.event.addListener(markers[ind], 'mouseover', function () {
-				info.setContent(contents);
-				info.open(map, markers[ind]);
+												});
+			marker.setMap(map);
+		}
+	
+		function addMarkerInfo(latlng,html) {
+				
+				markers.push(new google.maps.Marker({
+												position:latlng,
+												}));
+				ind = markers.length - 1;
+				contents = "<div onload=\"$('abbr.timeago').timeago()\">"+html+"</div>";
+				if(!info)
+					info = new google.maps.InfoWindow();
+				google.maps.event.addListener(markers[ind], 'mouseover', function () {
+					info.setContent(contents);
+					info.open(map, markers[ind]);
+				});
+				markers[ind].setMap(map);		
+				$("abbr.timeago").timeago();
+		}
+	
+	
+		function addInfo(latlng,html) {
+			if(!info) 
+				info = new google.maps.InfoWindow();			
+			info.setContent(html);
+			info.open(map,markersArray[0]);
+		}
+	
+		//Reverse Geocoding function
+		function getAddress(latLng) {
+		// Check to see if a geocoder object already exists
+			if (!geocoder) 
+				geocoder = new google.maps.Geocoder();
+		// Creating a GeocoderRequest object
+			var geocoderRequest = {
+				latLng: latLng,
+			};	  
+			geocoder.geocode(geocoderRequest, function(results, status) {
+				// Check to see if the request went allright
+				if (status == google.maps.GeocoderStatus.OK) {
+					if (results[0].formatted_address) 
+							return results[0].formatted_address;
+				}
+				else 
+					return "";
 			});
-			markers[ind].setMap(map);		
-			$("abbr.timeago").timeago();
-	}
-	
-	
-	function addInfo(latlng,html) {
-		if(!info) 
-			info = new google.maps.InfoWindow();			
-		info.setContent(html);
-		info.open(map,markersArray[0]);
-	}
-	
-	//Reverse Geocoding function
-	function getAddress(latLng) {
-	// Check to see if a geocoder object already exists
-		if (!geocoder) 
-			geocoder = new google.maps.Geocoder();
-	// Creating a GeocoderRequest object
-		var geocoderRequest = {
-			latLng: latLng
-		};	  
-		geocoder.geocode(geocoderRequest, function(results, status) {
-			// Check to see if the request went allright
-			if (status == google.maps.GeocoderStatus.OK) {
-				if (results[0].formatted_address) 
-						return results[0].formatted_address;
-			}
-			else 
-				return "";
-		});
 		  		
-	}
+		}
 	</script>
 </head>
 <body onLoad="initialize()">
