@@ -50,7 +50,7 @@
 		function addMarker(location) {
 			marker = new google.maps.Marker({
 				position: location,
-				map: map
+				map: map,
 			});
 			markersArray.push(marker);
 		}
@@ -92,7 +92,7 @@
 		
 			// Get location from facebook
 			var geocoderRequest = {
-				address: '<?php if (isset($fbme['location'])) {echo $fbme['location']['name'];}?>'
+				address: '<?php if (isset($fbme['location'])) {echo $fbme['location']['name'];}?>',
 			};
 		  
 			geocoder.geocode(geocoderRequest, function(results, status) {
@@ -124,7 +124,7 @@
 						lat:event.latLng.lat(),
 						lng:event.latLng.lng(),
 						tag:tag,
-						loc:loc 
+						loc:loc, 
 					});
 					info.close();
 					now = new Date;
@@ -181,7 +181,7 @@
 				geocoder = new google.maps.Geocoder();
 		// Creating a GeocoderRequest object
 			var geocoderRequest = {
-				latLng: latLng
+				latLng: latLng,
 			};	  
 			geocoder.geocode(geocoderRequest, function(results, status) {
 				// Check to see if the request went allright
