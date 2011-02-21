@@ -13,14 +13,14 @@ echo "<p>Updates from friends</p>";
 if($start<=0) // if the page start index is negative, reset it.
         $start=0;
 
-$upper_limit = $start + 6;
+$upper_limit = $start + 4;
 $query1 = "SELECT uid,lat,lng,status,timestamp,tag FROM updates WHERE uid IN  (SELECT uid2 FROM connections WHERE uid1 = \"$me\") ORDER BY timestamp DESC LIMIT $start, $upper_limit";
 $r = db_query($query1);
 
 $i=0;
 
-/*Fetches 6 latest updates from the user's friends*/
-for($i=$start;$i<($start+6);$i++) {
+/*Fetches 4 latest updates from the user's friends*/
+for($i=$start;$i<($start+4);$i++) {
         $result = mysql_fetch_array($r);
         $r2 = db_query("SELECT * FROM users1 WHERE uid = \"$result[uid]\"");
         $res2 = mysql_fetch_array($r2);
@@ -47,9 +47,9 @@ $query1 = "SELECT * FROM updates WHERE uid IN  (SELECT uid2 FROM connections WHE
 $r = db_query($query1);
 
 if($start!=0){
-        echo '<a id="prev" href = "#" onclick = \'$("#frnd_upd").load("ffeed.php","uid='.$uid.'&start='.($start-6).'");\';\'>prev</a>';}
-if(mysql_num_rows($r)>($start+6))
-        echo '<a id="next" href = "#" onclick = \'$("#frnd_upd").load("ffeed.php","uid='.$uid.'&start='.($start+6).'");\'>next</a>';
+        echo '<a id="prev" href = "#" onclick = \'$("#frnd_upd").load("ffeed.php","uid='.$uid.'&start='.($start-4).'");\';\'>prev</a>';}
+if(mysql_num_rows($r)>($start+4))
+        echo '<a id="next" href = "#" onclick = \'$("#frnd_upd").load("ffeed.php","uid='.$uid.'&start='.($start+4).'");\'>next</a>';
 
 ?>
 <script type="text/javascript" >

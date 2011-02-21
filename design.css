@@ -4,46 +4,45 @@ body {
 	margin: 0px;
 	padding: 0px;
 	width: 600px;
+	
 }
   #map_canvas { height: 100%; width: 60% }
 #apDiv1 {
 	position:absolute;
-	left:364px;
+	left:374px;
 	width:301px;
 	z-index:1;
-	
 }
 #apDiv2 {
 	position:absolute;
-	left:364px;
+	left:374px;
 	width:301px;
-	top: 150px;
+	top: 155px;
 	z-index:1;
 	
 }
 #frnd_upd {
 	position:absolute;
-	left:364px;
+	left:374px;
 	width:301px;
-	top: 280px;	
-	height: 200px;
+	top: 180px;	
+	height: 270px;
 	z-index:1;
-	overflow:auto;
+
 	
 }
 .design{
 font:"Lucida Sans Unicode", "Lucida Grande", sans-serif;
 font-size: 9pt;
-background-color:#DDD;
-color:#000;
-
+background-color: #ffa644;/* #f6f6f6;*/
+color: #002d40;/* black; */
 }
 
 .design2 {
 font:"Lucida Sans Unicode", "Lucida Grande", sans-serif;
 font-size: 9pt;
-background-color: white;
-color:#000;
+background-color: #e54661; /* white;*/
+color: white;/* #2c594f;*/
 
 }
 
@@ -112,9 +111,25 @@ color: gray;
 /* for status updates in friend feed*/
 .status {
 font-size: 9pt;
-color: brown;
+color: #217500;
 border-bottom-style: dotted;
 border-bottom-width: 1px;
 text-decoration: none;
 }
 
+.continue a:hover 
+{
+background-color: blue;
+color: white;
+text-decoration: underline;
+font-size: 18pt;
+left: 40%;
+}
+
+.continue a {
+background-color: white;
+color: blue;
+text-decoration: none;
+font-size: 14pt;
+left: 40%;
+}

@@ -7,6 +7,7 @@ include "boilerplate.php";
 include_once "fbmain.php";
 include_once "kygame.php";
 $tag = '';
+$geo = '';
 $me = $_REQUEST['uid'];
 $msg = $_REQUEST['msg'];
 $lat = $_REQUEST['lat'];
@@ -18,8 +19,6 @@ if (isset($_REQUEST['loc']))
 	$loc = $_REQUEST['loc'];
 $wall = $msg;
 
-if($loc && strcmp($loc, "undefined"))
-	$wall = $wall." at ".$loc;
 
 $mysqldate = date('Y-m-d H:i:s');//Gets the current server time and converts it to MySQL format.
 $tag_data = array();
@@ -37,8 +36,14 @@ $query2 = "UPDATE users1 SET lat=$lat , lng=$lng , status = \"$msg\" , time = \"
 $r = db_query($query1);
 $r1 = db_query($query2);
 
-//TODO tag_database - tag tag_msg img type
-
+//Geocoding with cURL
+$ch = curl_init("http://maps.googleapis.com/maps/api/geocode/json?latlng=$lat,$lng&sensor=true");
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 3);
+$georesults = json_decode(curl_exec($ch));
+if($georesults)
+	$geo = " @ " . ($georesults->results[0]->formatted_address);
+$geo = $geo . " - ( $lat, $lng )";
 
 if($r and $r1) {
 	echo '100';//Success 
@@ -46,7 +51,7 @@ if($r and $r1) {
 	$result = $facebook->api(
             '/me/feed/',
             'post',
-            array('message' => "$wall .                       powered by mapTheGraph - try it here                   $fbconfig[appBaseUrl]")
+            array('message' => "$wall$geo.                       powered by mapTheGraph - try it here                   $fbconfig[appBaseUrl]")
         );
     	game_status_update($me);
 }
@@ -54,7 +59,7 @@ if($r and $r1) {
 			$result = $facebook->api(
             '/me/feed/',
             'post',
-            array('message' => "$fbme[first_name] $tag_data[message]",
+            array('message' => "$fbme[first_name] $tag_data[message]$geo.",
             		'link' => "http://apps.facebook.com/maptg_one",
             		'name' => 'Click here to visit mapTheGraph now! .Find where your friends are right now!',
             		'picture' => $fbconfig['baseUrl'].$tag_data['image']
