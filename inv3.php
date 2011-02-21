@@ -1,5 +1,5 @@
 <?php
-	include_once "fbmain.php";
+include_once "fbmain.php";
 ?>
 <html xmlns:fb="http://www.facebook.com/2008/fbml">
 <head>

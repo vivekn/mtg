@@ -2,7 +2,9 @@
 function addToMap(uid, uname, ustatus, utime, lat, lng, geo, cent) {
 /*function to create and append html to infowindows in the map representing status updates*/
 	var latlngl = new google.maps.LatLng(lat, lng);
-	var html = "<img src='http://graph.facebook.com/"+uid+"/picture/'  width='35' height='35' align='left'/><a> "+uname+"</a><br><a class='status'> "+ustatus+ " (" + geo + " ).";
+	if (geo)
+		geo = " (" + geo + " ).";
+	var html = "<img src='http://graph.facebook.com/"+uid+"/picture/'  width='35' height='35' align='left'/><a> "+uname+"</a><br><a class='status'> "+ustatus+geo;
 	addMarkerInfo(latlngl,html);
 	if (cent)
 		map.setOptions({center: latlngl});

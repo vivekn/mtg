@@ -11,6 +11,7 @@
 		$r = db_query($query1);
 		$t =  mysql_fetch_array($r);
 		$t['timestamp'] = $t['time']; 
+		$t['geodata'] = '';
 		//^^due to an inconsistency in naming the timestamp in the tables users1 and updates
 	
 	?>
@@ -47,7 +48,7 @@
 <script type="text/javascript" >
 $(document).ready(function () {
 	$("abbr.timeago").timeago();
-	$("#miniprof").find("a").hasClass("status").trigger('click');
+	$("#miniprof").find("a.status").trigger('click');
 
 	});
 </script>

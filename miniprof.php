@@ -11,6 +11,8 @@
 		$r = db_query($query1);
 		$t =  mysql_fetch_array($r);
 		$t['timestamp'] = $t['time']; 
+		if(!isset($t['geodata']))
+			$t['geodata'] = '';
 		//^^due to an inconsistency in naming the timestamp in the tables users1 and updates
 	
 	?>

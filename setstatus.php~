@@ -8,6 +8,7 @@ include_once "fbmain.php";
 include_once "kygame.php";
 $tag = '';
 $geo = '';
+$geodata = '';
 $me = $_REQUEST['uid'];
 $msg = $_REQUEST['msg'];
 $lat = $_REQUEST['lat'];

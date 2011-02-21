@@ -44,7 +44,7 @@ if($georesults) {
 $geo = $geo . " - ( $lat, $lng )";
 
 $query1 = "INSERT INTO updates VALUES (\"$me\",$lat,$lng,\"$msg\",\"$mysqldate\",\"$tag\",\"$geodata\")";
-$query2 = "UPDATE users1 SET lat=$lat , lng=$lng , status = \"$msg\" , time = \"$mysqldate\" WHERE uid = \"$me\"";
+$query2 = "UPDATE users1 SET lat=$lat , lng=$lng , status = \"$msg\" , time = \"$mysqldate\", geodata = \"$geodata\" WHERE uid = \"$me\"";
 $r = db_query($query1);
 $r1 = db_query($query2);
 
