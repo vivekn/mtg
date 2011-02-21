@@ -3,31 +3,30 @@
 ?>
 <html xmlns:fb="http://www.facebook.com/2008/fbml">
 <head>
-<style type="text/css">
-a.newfield:hover {
-background-color: red;
-color: white; 
-text-decoration: none;
-float: right;
-border:2px solid;
-margin-bottom: 2px;
-}
-
-a.newfield {
-background-color: white;
-color: black;
-text-decoration: none;
-float: right;
-border:2px solid; 
-margin-bottom: 2px;
-}
-
-</style>
+	<style type="text/css">
+	a.newfield:hover {
+		background-color: red;
+		color: white; 
+		text-decoration: none;
+		float: right;
+		border:2px solid;
+		margin-bottom: 2px;
+	}
+	
+	a.newfield {
+		background-color: white;
+		color: black;
+		text-decoration: none;
+		float: right;
+		border:2px solid; 
+		margin-bottom: 2px;
+	}
+	
+	</style>
 </head>
 <body>
-<h4>Invite your friends to mapTheGraph</h4>
-    <?php  
-
+	<h4>Invite your friends to mapTheGraph</h4>
+   <?php  
 	include_once "boilerplate.php";
 	
     // Retrieve array of friends who've already added the app.  
@@ -45,70 +44,58 @@ margin-bottom: 2px;
  						'query' =>$fql2, 
  						'callback' => ''  
 							));  
-
-
-  
    $print_or_not = false;  // for the case if none of the user's friends have added the app.
    $items=0;//tracks the number of friends printed
    if (is_array($_friends) && count($_friends)) {  
 		$html = "<h4>Some of your friends are already on mapTheGraph. Would you like to add them ?</h4><br>";     
-        foreach($_friends as $friend) {  
-        
+      foreach($_friends as $friend) {  
         	$q = db_query("SELECT * FROM connections WHERE uid1 = $uid AND uid2 = $friend[uid]");
         	if ((!mysql_num_rows($q))&&$items<4) {
         		$print_or_not =true;
         		$html = $html . "<span class='newfield'>$friend[name]<a class = 'newfield' name='$friend[uid]' href ='#'>Add</a></span><br>";
         		$items++;
-        		}
+        	}
              
-       }  
+      }  
    }
         
  	$friends = array(); 
-	foreach ($_friends as $friend) {  
-           $friends[] = $friend['uid'];  
-       }  
+	foreach ($_friends as $friend) 
+           $friends[] = $friend['uid'];    
    $excl = implode(',', $friends);  
-?>
-<p>Invite your friends to mapTheGraph!. Inviting your friends to use mapTheGraph will dramatically improve your experience and chances of finding the coolest places in town. Plus you will earn mapTheGraph points for every invite you send, this can later be redeemed for special gifts and prizes!</p>   	
-<div id="fb-root"></div>
-<fb:serverfbml>
-  <script type="text/fbml" >
-
-
+	?>	
+	<p>Invite your friends to mapTheGraph!. Inviting your friends to use mapTheGraph will dramatically improve your experience and chances of finding the coolest places in town. Plus you will earn mapTheGraph points for every invite you send, this can later be redeemed for special gifts and prizes!</p>   	
+	<div id="fb-root"></div>
+	<fb:serverfbml>
+  	<script type="text/fbml" >
      <fb:request-form action="<?=$fbconfig['baseUrl']?>proc_inv.php" method="POST" invite="true" type="mapTheGraph!" 
        content="Hi, I am using mapTheGraph, an app that lets you find and share cool and exciting places. I would like to add you to my graph!.">
      <fb:multi-friend-selector actiontext="Invite your friends to use this app."  exclude_ids = "<?=$excl?>" email_invite="false" import_external_friends="false"/> 
   
-  </fb:request-form>
-</script>
-  </fb:serverfbml>
-  
+  	</fb:request-form>
+	</script>
+  	</fb:serverfbml>
   <script>
-	window.fbAsyncInit = function() {
-	FB.init({
-		appId : '129413090453935',
-		session : <?=json_encode($session)?>, // don't refetch the session when PHP already has it
-		status : true, // check login status
-		cookie : true, // enable cookies to allow the server to access the session
-		xfbml : true // parse XFBML
-	});
-	
-	// whenever the user logs in, we refresh the page
-	FB.Event.subscribe('auth.login', function() {
-		window.location.reload();
-	});
-	};
-	
-	(function() {
-		var e = document.createElement('script');
-		e.src = document.location.protocol + '//connect.facebook.net/en_US/all.js';
-		e.async = true;
-		document.getElementById('fb-root').appendChild(e);
-	}());
-	
-	
-	
-</script>
+		window.fbAsyncInit = function() {
+			FB.init({
+				appId : '129413090453935',
+				session : <?=json_encode($session)?>, // don't refetch the session when PHP already has it
+				status : true, // check login status
+				cookie : true, // enable cookies to allow the server to access the session
+				xfbml : true // parse XFBML
+			});
+		// whenever the user logs in, we refresh the page
+			FB.Event.subscribe('auth.login', function() {
+				window.location.reload();
+			});
+		};
+		
+		(function() {
+			var e = document.createElement('script');
+			e.src = document.location.protocol + '//connect.facebook.net/en_US/all.js';
+			e.async = true;
+			document.getElementById('fb-root').appendChild(e);
+		}());	
+	</script>
 </body>
 </html>

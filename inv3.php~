@@ -3,46 +3,30 @@
 ?>
 <html xmlns:fb="http://www.facebook.com/2008/fbml">
 <head>
-<style type="text/css">
-a.newfield:hover {
-background-color: red;
-color: white; 
-text-decoration: none;
-float: right;
-border:2px solid;
-margin-bottom: 2px;
-}
-
-a.newfield {
-background-color: white;
-color: black;
-text-decoration: none;
-float: right;
-border:2px solid; 
-margin-bottom: 2px;
-}
-
-</style>
+	<style type="text/css">
+	a.newfield:hover {
+		background-color: red;
+		color: white; 
+		text-decoration: none;
+		float: right;
+		border:2px solid;
+		margin-bottom: 2px;
+	}
+	
+	a.newfield {
+		background-color: white;
+		color: black;
+		text-decoration: none;
+		float: right;
+		border:2px solid; 
+		margin-bottom: 2px;
+	}
+	
+	</style>
 </head>
 <body>
-<h4>Invite your friends to mapTheGraph</h4>
-<script type="text/javascript" src="js/jquery-1.4.2.min.js"></script>
-<script type="text/javascript" >
-//Event handlers for Add and Invite buttons generated below
-	$(document).ready(function () {	
-	$('.newfield').click( function () {
-		$(this).hide('slow');		
-		var friendId = $(this).attr('name');		
-		$.post('createreq.php',{
-										uid:<?php echo $uid;?>,
-										sent_to:friendId
-											});
-		});
-		}
-		);
-</script>
-    <?php  
-
+	<h4>Invite your friends to mapTheGraph</h4>
+   <?php  
 	include_once "boilerplate.php";
 	
     // Retrieve array of friends who've already added the app.  
@@ -60,31 +44,26 @@ margin-bottom: 2px;
  						'query' =>$fql2, 
  						'callback' => ''  
 							));  
-
-
-  
    $print_or_not = false;  // for the case if none of the user's friends have added the app.
    $items=0;//tracks the number of friends printed
    if (is_array($_friends) && count($_friends)) {  
 		$html = "<h4>Some of your friends are already on mapTheGraph. Would you like to add them ?</h4><br>";     
-        foreach($_friends as $friend) {  
-        
+      foreach($_friends as $friend) {  
         	$q = db_query("SELECT * FROM connections WHERE uid1 = $uid AND uid2 = $friend[uid]");
         	if ((!mysql_num_rows($q))&&$items<4) {
         		$print_or_not =true;
         		$html = $html . "<span class='newfield'>$friend[name]<a class = 'newfield' name='$friend[uid]' href ='#'>Add</a></span><br>";
         		$items++;
-        		}
+        	}
              
-       }  
+      }  
    }
         
  	$friends = array(); 
-	foreach ($_friends as $friend) {  
-           $friends[] = $friend['uid'];  
-       }  
+	foreach ($_friends as $friend) 
+           $friends[] = $friend['uid'];    
    $excl = implode(',', $friends);  
-?>
+	?>	
 <p>Invite your friends to mapTheGraph!. Inviting your friends to use mapTheGraph will dramatically improve your experience and chances of finding the coolest places in town. Plus you will earn mapTheGraph points for every invite you send, this can later be redeemed for special gifts and prizes!</p>   	
 <div id="fb-root"></div>
 <fb:serverfbml>

@@ -1,15 +1,14 @@
 <?php
 include_once "boilerplate.php";
 include_once "kygame.php";
+
 /* DB code for accepting friend requests and invitations */
-
 function accept_friend($me,$sent_from,$invite_mode,$accepted) {
-
 	if ($invite_mode)
 		$query1 = "DELETE FROM invites WHERE (invited_by = \"$sent_from\" AND invited = \"$me\")";
 	else
 		$query1 = "DELETE FROM requests WHERE (sent_from = \"$sent_from\" AND sent_to = \"$me\")";
-	
+
 	$exec = db_query($query1);	
 	if ($accepted){
 		//check if the user has accepted the request		
