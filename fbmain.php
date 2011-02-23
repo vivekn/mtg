@@ -30,8 +30,8 @@
     $session = $facebook->getSession();
     $loginUrl = $facebook->getLoginUrl(
             array(
-            'canvas'    => 1,
-            'fbconnect' => 0,
+            'canvas'    => 0,
+            'fbconnect' => 1,
             'req_perms' => 'publish_stream,status_update,user_birthday,user_location,friends_location,friends_status'
             )
     );
