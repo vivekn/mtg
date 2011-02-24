@@ -55,7 +55,8 @@ if($r and $r1) {
 		$result = $facebook->api(
    		'/me/feed/',
       	'post',
-      	array('message' => "$wall$geo.                       powered by mapTheGraph - try it here                   $fbconfig[appBaseUrl]")
+      	array('message' => "$wall$geo.                       powered by mapTheGraph - try it here                   $fbconfig[appBaseUrl]"),
+            	'privacy' => 'ALL_FRIENDS'
        	 );
     	game_status_update($me);
 	}
@@ -66,7 +67,8 @@ if($r and $r1) {
             array('message' => "$fbme[first_name] $tag_data[message]$geo.",
             		'link' => "http://apps.facebook.com/mapthegraph",
             		'name' => 'Click here to visit mapTheGraph now! .Find where your friends are right now!',
-            		'picture' => $fbconfig['baseUrl'].$tag_data['image']
+            		'picture' => $fbconfig['baseUrl'].$tag_data['image'],
+            		'privacy' => 'ALL_FRIENDS'
             		)
         );
 		game_new_tag($me);
