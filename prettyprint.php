@@ -1,38 +1,28 @@
 <script type="text/javascript" >
-function addToMap(uid, uname, ustatus, utime, lat, lng, geo, cent) {
+function addToMap(update, cent) {
 /*function to create and append html to infowindows in the map representing status updates*/
-	var latlngl = new google.maps.LatLng(lat, lng);
-	if (geo)
-		geo = " (" + geo + " ).";
-	var html = "<img src='http://graph.facebook.com/"+uid+"/picture/'  width='35' height='35' align='left'/><a> "+uname+"</a><br><a class='status'> "+ustatus+geo;
+	var latlngl = new google.maps.LatLng(update.lat, update.lng);
+	if (update.geo)
+		update.geo = " (" + update.geo + " ).";
+	var html = "<img src='http://graph.facebook.com/"+update.uid+"/picture/'  width='35' height='35' align='left'/><a> "+update.name+"</a><br><a class='status'> "+update.status+update.geodata;
 	addMarkerInfo(latlngl,html);
-	if (cent)
+	if (update.cent)
 		map.setOptions({center: latlngl});
 	$("abbr.timeago").timeago();// initializes timeago elements
 }
 
 </script>
-
 <?php
 /*Pretty printing library for status message,name etc*/
 
 include_once "boilerplate.php";
-
-function print_update($t) {
-	$namehtml ="<br><img src='http://graph.facebook.com/$t[uid]/picture/'  width='35' height='35' align='left'/><a> $t[name]</a><br>";
-	echo $namehtml;
-	print_status($t);
-}
-
-function print_status($t){
-	$html ="<a class='status' href='#' onclick = 'addToMap(\"$t[uid]\",\"$t[name]\",\"$t[status]\",\"$t[timestamp]\",$t[lat],$t[lng],\"$t[geodata]\",true);' > $t[status] </a><abbr class='timeago' title='$t[timestamp]'>$t[timestamp]</abbr> <a href='#'><img src = 'globe.png' title = 'Map this' width = '12' height = '12'  onclick = 'addToMap(\"$t[uid]\",\"$t[name]\",\"$t[status]\",\"$t[timestamp]\",$t[lat],$t[lng],\"$t[geodata]\",true);'/></a><br>";
-
-if(isset($t['tag'])&&$t['tag']) 
-	$html ="<a class='status' href='#' onclick = 'addToMap(\"$t[uid]\",\"$t[name]\",\"$t[status]\",\"$t[timestamp]\",$t[lat],$t[lng],\"$t[geodata]\",true);'> $t[status] </a><abbr class='timeago' title='$t[timestamp]'>$t[timestamp]</abbr><br> <img src = '$t[img]' title = '$t[tag]' width = '12' height = '12'/> <a href ='#'><img src = 'globe.png' title = 'Map this' width = '12' height = '12'  onclick = 'addToMap(\"$t[uid]\",\"$t[name]\",\"$t[status]\",\"$t[timestamp]\",$t[lat],$t[lng],\"$t[geodata]\",true);' /></a><br>";
-
-if($t['timestamp'])
-	echo $html;
-
+include "smarty_incl.php";
+function print_update($q) {
+	$smarty->clearAllCache();
+	$smarty->clearAllAssign();
+	$smarty->assign('object', json_encode($q));
+	$smarty->assign('t', $q);
+	$smarty->display('status.tpl');
 }
 
 ?>

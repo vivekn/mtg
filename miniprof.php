@@ -20,7 +20,7 @@
     <h4><?=$t['name']?></h4>
     	<HR>
 	<p>
-   <?php print_status($t); ?>
+   <?php print_update($t); ?>
     </p>
     <?php 
     	include_once "kygame.php";
