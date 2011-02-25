@@ -14,7 +14,7 @@ if($start<=0) // if the page start index is negative, reset it.
 	$start=0;
 	
 $upper_limit = $start + 4;
-$query1 = "SELECT uid,lat,lng,status,timestamp,tag FROM updates WHERE uid IN  (SELECT uid2 FROM connections WHERE uid1 = \"$me\") ORDER BY timestamp DESC LIMIT $start, $upper_limit";
+$query1 = "SELECT uid,lat,lng,status,timestamp,tag,geodata FROM updates WHERE uid IN  (SELECT uid2 FROM connections WHERE uid1 = \"$me\") ORDER BY timestamp DESC LIMIT $start, $upper_limit";
 $r = db_query($query1);
 $i=0;
 /*Fetches 4 latest updates from the user's friends*/

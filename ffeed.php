@@ -28,6 +28,7 @@ for($i=$start;$i<($start+4);$i++) {
    	break;
    $result['name'] = $res2['name'];
    $result['img'] = $res3['image'];
+   $result['display_name'] = true;
    print_update($result);
  }
         
